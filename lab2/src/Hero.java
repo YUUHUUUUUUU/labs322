@@ -13,6 +13,9 @@ public class Hero extends Entity {
 
         super(name,life,shield);
 
+        this.life=life;
+        this.name=name;
+        this.shield=shield;
         this.energy=energy;
         this.regeneration=regeneration;
         this.hand=hand;
@@ -53,7 +56,7 @@ public class Hero extends Entity {
     }
 
     public int getRegeneration(){
-        return regeneration;
+        return this.regeneration;
     }
 
     //de fato regenera a energia do herói
@@ -62,7 +65,7 @@ public class Hero extends Entity {
     }
 
     //DECK OF CARDS:
-    private ArrayList<Card> gethandDeck(){
-        return hand;
+    public ArrayList<Card> gethandDeck(){
+        return this.hand;
     }
 }

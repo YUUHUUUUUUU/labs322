@@ -6,6 +6,8 @@ public class CardShield extends Card {
     //construct
     public CardShield(String name, String description, int cost, int shield){
         super(name,description,cost);
+        this.name=name;
+        this.cost=cost;
         this.shield=shield;
     }
 
@@ -15,6 +17,7 @@ public class CardShield extends Card {
         hero.alteraEnergy(this.cost);
         System.out.println("Used " + this.name);
         System.out.println(hero.getName() + " gained " + this.shield + " shield!");
+        System.out.println("");
     }
 
     //mostra status da carta

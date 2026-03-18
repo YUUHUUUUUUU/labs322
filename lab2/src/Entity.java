@@ -9,7 +9,8 @@ public abstract class Entity {
         this.life=life;
         this.name=name;
         this.shield=shield;
-    }
+    } //tem algum erro aqui. quando atualizo o heroi, nao ta atualizando a entidade em si.
+    // por isso as vezes ta aparecendo "Nome" no print ao inves do nome escolhido
 
     public String getName(){
         return this.name;

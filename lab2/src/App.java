@@ -1,23 +1,24 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Stack;
+import java.util.Queue;
 import java.util.Collections;
+import java.util.LinkedList;
 
 public class App {
 
     public static void main(String[] args){
         //instanciando os decks
         ArrayList<Card> hand = new ArrayList<Card>();
-        Stack<Card> buyStack = new Stack<Card>();
-        Stack<Card> trashStack = new Stack<Card>();
+        Queue<Card> buyQueue = new LinkedList<Card>();
+        Queue<Card> trashQueue = new LinkedList<Card>();
         
         //todos os objetos
-        Hero hero = new Hero("Nome", 35, 0, 5,3,hand);
+        Hero hero = new Hero("Nome", 45, 0, 5,3,hand);
         Enemy enemy = new Enemy("IFGW", 20, 0,7);
 
         CardDamage espada = new CardDamage("Espada","Strong attack", 5, 10);
         CardDamage tapa = new CardDamage("Tapa","Weak attack",2, 3);
-        CardDamage chute = new CardDamage("Chute","Energetic attack",4,7);
+        CardDamage chute = new CardDamage("Chute","Energetic attack",4,10);
         CardDamage soco = new CardDamage("Soco", "Medium attack", 3, 6);
 
         CardShield escudoferro = new CardShield("Escudo","Strong defense", 4, 7);
@@ -26,15 +27,15 @@ public class App {
         CardShield escudodiamante = new CardShield("Escudo de diamante","Expensive and resistent",10, 18);
 
         //
-        Stack<Card> general = new Stack<Card>();
-        general.push(espada);
-        general.push(tapa);
-        general.push(soco);
-        general.push(chute);
-        general.push(escudoQuebrado);
-        general.push(escudodiamante);
-        general.push(escudoferro);
-        general.push(escudoQuebrado);
+        ArrayList<Card> general = new ArrayList<Card>();
+        general.add(espada);
+        general.add(tapa);
+        general.add(soco);
+        general.add(chute);
+        general.add(escudoQuebrado);
+        general.add(escudodiamante);
+        general.add(escudoferro);
+        general.add(escudomadeira);
 
         //escolhendo nome do hero
         System.out.println("Enter your name to begin battle:");
@@ -60,91 +61,84 @@ public class App {
 
 
             //TURNO DO HERÒI:
-            Collections.shuffle(general);
 
-            int i=0;
-            while(i<=2){
+            if (trashQueue.size()==0){ //se a pilha de lixo estiver vazia
+                Collections.shuffle(general);
+                int i=0;
+                while(i<=2){
 
-                buyStack.push(general.peek());
-                //tira do cmc e poe no fim
-                Card aux = general.peek();
-                general.pop();
-                general.push(aux);
-                i++;
+                    buyQueue.add(general.get(0));
+
+                    //tira do cmc do geral e poe no fim
+                    Card aux = general.get(0);
+                    general.remove(0);
+                    general.add(aux);
+                    i++;
+                }
+            } else {
+                buyQueue.addAll(trashQueue);//transforma o lixo na nova fila de compra
+
+                int s=buyQueue.size();
+                while(s<4){//adiciona mais valores a compra se nao tiver 3
+
+                    buyQueue.add(general.get(0));
+
+                    //tira do cmc do geral e poe no fim
+                    Card aux = general.get(0);
+                    general.remove(0);
+                    general.add(aux);
+                    s++;
+                }
             }
 
-            System.out.println("You have " + hero.getEnergy() + " energy.");
-            System.out.println("If you want to buy " + buyStack.peek().getName() + " press 1. Otherwise, press 0.");
+            int contador=0;
+            while (buyQueue.size()>0 && contador<3){
+                System.out.println("Your turn to buy!");
+                Card now = buyQueue.peek();
+                System.out.println("You have " + hero.getEnergy() + " energy.");
+
+                System.out.println("If you want to buy " + now.getName() + " press 1. Otherwise, press 0.");
+                now.showDescription();
 
 
+                int option = entrada.nextInt();
+                contador++;
 
 
+                if (option==1 && hero.getEnergy()>=now.getCost()){
 
+                    hand.add(now);
+                    System.out.println(now.getName() + " was acquired!");
+                    System.out.println("");
+                    hero.alteraEnergy(now.getCost());
+                    buyQueue.remove();
+                    continue;
 
-
-             
-            
-            
-            
-            
-            
-            
-            
-            System.out.println("Select a number to choose your action (an invalid entry will skip your turn)");
-
-            //opcoes de acao
-            System.out.print("1: ");
-            espada.showDescription();
-            System.out.print("2: ");
-            tapa.showDescription();
-            System.out.print("3: ");
-            escudoferro.showDescription();
-            System.out.print("4: ");
-            escudoQuebrado.showDescription();
-
-            //loop de escolha de acao do hero
-            while(true){
-                int action = entrada.nextInt();
-                if(action == 1){
-                    //usa espada
-                    if(hero.getEnergy()>=espada.getCost()){
-                        espada.usar(enemy,hero);
-                        break;
-
-                    }else{
-                        System.out.print("Insuficient energy, choose another action!\n");
-                    }
-                }else if(action == 2){
-                    //usa tapa
-                    if(hero.getEnergy()>=tapa.getCost()){
-                        tapa.usar(enemy,hero);
-                        break;
-
-                    }else{
-                        System.out.print("Insuficient energy, choose another action!\n");
-                    }
-                }else if(action == 3){
-                    //usa escudo
-                    if(hero.getEnergy()>=escudoferro.getCusto()){
-                        escudoferro.usar(enemy,hero);
-                        break;
-                    }else{
-                        System.out.print("Insuficient energy, choose another action!\n");
-                    }
-                }else if(action == 4){
-                    //usa escudoQuebrado
-                    if(hero.getEnergy()>=escudoQuebrado.getCusto()){
-                        escudoQuebrado.usar(enemy,hero);
-                        break;
-
-                    }else{
-                        System.out.print("Insuficient energy, choose another action!\n");
-                    }
-                }else{
-                    //pula turno
-                    System.out.print("Invalid entry, turn skipped!\n");
-                    break;
+                } else if (hero.getEnergy()<=now.getCost() && option==1){
+                    System.out.println("You don't have enough energy! The card was, therefore, discarded!");
+                    System.out.println("");
+                    trashQueue.add(now);
+                    buyQueue.remove();
+                    continue;
+                } else if (option==0){
+                    trashQueue.add(now);
+                    System.out.println("You discarded the " + now.getName() + "!");
+                    System.out.println("");
+                    buyQueue.remove();
                 }
+            }
+
+            System.out.println("Press enter to use your cards. If you haven't picked any cards, your turn will be skipped.");
+            String novoholder = entrada.nextLine();
+            int t=hand.size();
+            if (hand.size()>0){
+                for (int i=0;i<hand.size();i++){
+                    Card now = hand.get(0);
+                    now.usar(enemy,hero);
+                    hand.remove(now);//descarta depois de usar
+                }
+            } else if (t==0){
+                System.out.println("Turn skipped!");
             }
 
             //ataque do enemy
@@ -154,9 +148,6 @@ public class App {
                 break;
             } else {
                 enemy.attack(hero);
-                System.out.println("");
-                System.out.println(enemy.getName() + " attacked! " + "You lost " + enemy.getDano(hero) + " life!");
-                System.out.println("");
             }
 
             //verifica se hero esta vivo
@@ -165,7 +156,7 @@ public class App {
                 break;
             }
 
-            //regenera vida do hero e vai para o proximo round
+            //regenera energia do hero e vai para o proximo round
             hero.regenera();
             System.out.println("Round ended.");
             System.out.println("You regenerated " + hero.getRegeneration() + " energy!");
