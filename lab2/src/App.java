@@ -17,7 +17,7 @@ public class App {
         ArrayList<Card> trashPile = new ArrayList<Card>();
         
         //todos os objetos
-        Hero hero = new Hero("Nome", 45, 0, 5,3,hand);
+        Hero hero = new Hero("Nome", 45, 0, 5,3);
         Enemy enemy = new Enemy("IFGW", 20, 0,7);
 
         CardDamage espada = new CardDamage("Espada","Strong attack", 5, 10);
@@ -41,7 +41,7 @@ public class App {
         Collections.shuffle(buyPile);
 
         //escolhendo nome do hero
-        System.out.println("Enter your name to start the battle:");
+        System.out.println("Enter your name:");
         Scanner entrada = new Scanner(System.in);
         String name = entrada.nextLine();
         hero.setName(name);
@@ -50,7 +50,7 @@ public class App {
 
         //encontro com o enimigo
         System.out.println("You encountered " + enemy.getName() + "!");
-        System.out.println("Press enter to start the duel.");
+        System.out.println("Press enter to start the battle");
         String placeholder = entrada.nextLine();
         if(placeholder == "")
     
@@ -114,11 +114,11 @@ public class App {
 
                 } else System.out.println("Hand full!");
 
-            }else if (option!=2 && option!=1 && option!=3){
+            }else if(option!=2 && option!=1 && option!=3){
 
                 System.out.println("Shop skipped!");
 
-            } else {
+            } else{
                 System.out.println("You don't have enough energy to buy this/these card(s)! Turn skipped.");
             }
 

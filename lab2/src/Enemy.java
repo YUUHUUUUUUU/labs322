@@ -1,7 +1,4 @@
-public class Enemy extends Entity {
-    private String name;
-    private int life;
-    private int shield;
+public class Enemy extends Entity{
     private int dano_padrao;
 
     //construct
@@ -9,20 +6,13 @@ public class Enemy extends Entity {
 
         super(name,life,shield);
 
-        this.name=name;
-        this.life=life;
-        this.shield=shield;
         this.dano_padrao=dano_padrao;
     }
 
     //toma dano do herói de acordo com o parâmetro da arma do herói
     public void receiveDamage(int damage){
-        this.life-=damage;
+        this.subtractLife(damage);
     }
-
-    // public void alteraEnergia(int custo){
-    //     this.energia-=custo;
-    // }
 
     public int getDano(Hero hero){
         return Math.max(this.dano_padrao-hero.getShield(),1);
@@ -32,24 +22,14 @@ public class Enemy extends Entity {
         return this.dano_padrao;
     }
 
-    //mostra o status do inimigo
+    //mostra o status do inimigo (se em algum momento o inimigo tiver energia esse pode virar um metodo da classe Entity)
     public void showStatus(){
-        System.out.println(this.name + " status:");
-        System.out.println("Life: " + this.life);
+        System.out.println(this.getName() + " status:");
+        System.out.println("Life: " + this.getLife());
     }
 
     public void attack(Entity hero){
-        hero.receiveDamage(Math.max(this.dano_padrao- hero.getShield(),1));
-        //System.out.println(this.name + " attacked! " + "You lost " + (Math.max(this.dano_padrao - hero.getShield(),1)) + " life!");
+        hero.receiveDamage(dano_padrao);
         System.out.println("");
     }
-
-    public void shield_placeholder(){
-        if(this.shield == 0);
-    }
-
-    public int getShield(){
-        return this.shield;
-    }
-
 }

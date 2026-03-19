@@ -1,4 +1,4 @@
-public abstract class Entity {
+public abstract class Entity{
     private String name;
     private int life;
     private int shield;
@@ -9,37 +9,41 @@ public abstract class Entity {
         this.life=life;
         this.name=name;
         this.shield=shield;
-    } //tem algum erro aqui. quando atualizo o heroi, nao ta atualizando a entidade em si.
-    // por isso as vezes ta aparecendo "Nome" no print ao inves do nome escolhido
+    }
 
+    //name methods
     public String getName(){
         return this.name;
     }
-
-    public int getLife(){
-        return this.life;
+    public void setName(String name){
+        this.name=name;
     }
 
+    //shield methods
+    public int getShield(){
+        return this.shield;
+    }
     public void setShield(int value){
         this.shield+=value;
     }
+    public void increaseShield(int shield){
+        this.shield+=shield;
+    }
 
+    //life methods
+    public int getLife(){
+        return this.life;
+    }
     public boolean isAlive(){
         return (this.life>0); 
     }
-
-    //ABSTRATAS:
+    public void subtractLife(int x){
+        this.life -= x;
+    }
+    
+    //ABSTRATCTS:
 
     public abstract void receiveDamage(int damage);
 
     public abstract void showStatus();
-
-    public abstract int getShield();
-
-    //public abstract void shield();
-
-
-
-
-
 }
