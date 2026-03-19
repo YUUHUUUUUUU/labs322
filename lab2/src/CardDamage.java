@@ -25,6 +25,6 @@ public class CardDamage extends Card{
 
     //mostra dados da carta
     public void showDescription(){
-        System.out.println(this.name + " (" + this.damage + " damage, -" + this.cost + " energy)");
+        System.out.println(this.name + ", " + this.description + " (" + this.damage + " damage, -" + this.cost + " energy)");
     }
 }

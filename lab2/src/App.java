@@ -1,10 +1,14 @@
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Queue;
 import java.util.Collections;
-import java.util.LinkedList;
 
 public class App {
+
+    // public void espera(int n){//implementando esperas curtas para nao ter jumpscare de muito texto de uma vez
+    //     try {
+    //         Thread.sleep(n);
+    //     } catch (InterruptedException e){}
+    // }
 
     public static void main(String[] args){
         //instanciando os decks
@@ -21,21 +25,20 @@ public class App {
         CardDamage chute = new CardDamage("Chute","Energetic attack",4,7);
         CardDamage soco = new CardDamage("Soco", "Medium attack", 3, 5);
 
-        CardShield escudoferro = new CardShield("Escudo","Strong defense", 4, 7);
+        CardShield escudoFerro = new CardShield("Escudo","Strong defense", 4, 7);
         CardShield escudoQuebrado = new CardShield("Escudo Quebradao","Weak defense", 2, 2);
-        CardShield escudomadeira = new CardShield("Escudo de madeira","Medium defense",3,5);
-        CardShield escudodiamante = new CardShield("Escudo de diamante","Expensive and resistent",10, 18);
+        CardShield escudoMadeira = new CardShield("Escudo de madeira","Medium defense",3,5);
+        CardShield escudoDiamante = new CardShield("Escudo de diamante","Expensive and resistent",10, 18);
 
-        //
-        ArrayList<Card> general = new ArrayList<Card>();
-        general.add(espada);
-        general.add(tapa);
-        general.add(soco);
-        general.add(chute);
-        general.add(escudoQuebrado);
-        general.add(escudodiamante);
-        general.add(escudoferro);
-        general.add(escudomadeira);
+        buyPile.add(espada);
+        buyPile.add(tapa);
+        buyPile.add(soco);
+        buyPile.add(chute);
+        buyPile.add(escudoQuebrado);
+        buyPile.add(escudoDiamante);
+        buyPile.add(escudoFerro);
+        buyPile.add(escudoMadeira);
+        Collections.shuffle(buyPile);
 
         //escolhendo nome do hero
         System.out.println("Enter your name to start the battle:");
@@ -43,12 +46,13 @@ public class App {
         String name = entrada.nextLine();
         hero.setName(name);
 
+        // espera(500);
+
         //encontro com o enimigo
         System.out.println("You encountered " + enemy.getName() + "!");
-        System.out.println("Press enter to start the duel!");
-        System.out.println("You will regenerate " + hero.getRegeneration() + " points of energy each turn!");
+        System.out.println("Press enter to start the duel.");
         String placeholder = entrada.nextLine();
-        if(placeholder == "")//tira o erro por nao usar a variavel
+        if(placeholder == "")
     
         //loob da batalha
         while(true){
@@ -60,79 +64,69 @@ public class App {
             enemy.showStatus();
             System.out.println("-----------------------");
 
-
             //TURNO DO HERÒI:
-            if(general.size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
-                trashPile.addAll(general);
-                general.clear();
-                trashPile.shuffle();
-                general.addAll(trashPile);
+            if(buyPile.size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
+                trashPile.addAll(buyPile);
+                buyPile.clear();
+                Collections.shuffle(trashPile);
+                buyPile.addAll(trashPile);
                 trashPile.clear();
             }
 
             System.out.println("Your turn to buy!\nPress the number of the card you want, 3 if you want both or 0 to skip.");
 
-            buyPile.add(general.removeLast());
-            buyPile.add(general.removeLast());
+            Card card1 = buyPile.removeLast();
+            Card card2 = buyPile.removeLast();
 
             System.out.print("1: ");
-            buyPile.get(0).showDescription();
+            card1.showDescription();
             System.out.print("2: ");
-            buyPile.get(1).showDescription();
+            card2.showDescription();
 
             int option = entrada.nextInt();
             if(option == 1){
-                hand.add(buyPile.get(0));
-                trashPile.add(buyPile.get(1))
-                buyPile.clear();
-            }
+                if(hand.size()<4){
+                    hand.add(card1);
+                    trashPile.add(card2);
+                    System.out.println("You bought " + card1.getName());
+                } else System.out.println("Hand full!");
+            }else if(option == 2){
+                if(hand.size()<4){
+                    hand.add(card2);
+                    trashPile.add(card1);
+                    System.out.println("You bought " + card1.getName());
+                } else System.out.println("Hand full!");
+            }else if(option == 3){
+                if(hand.size()<3){
+                    hand.add(card1);
+                    hand.add(card2);
+                    System.out.println("You bought " + card1.getName() + "and " + card2.getName());
+                } else System.out.println("Hand full!");
+            }else System.out.println("Shop skipped!");
 
-            
+            //inplement the peek ability with cost 1 to see what will be the enemy attack
 
-            while (buyQueue.size()>0 && contador<3){
-
-
-                System.out.println("If you want to buy " + now.getName() + " press 1. Otherwise, press 0.");
-                now.showDescription();
-
-
-                int option = entrada.nextInt();
-                contador++;
-
-
-                if (option==1 && hero.getEnergy()>=now.getCost()){
-                    hand.add(now);
-                    System.out.println(now.getName() + " was acquired!");
-                    System.out.println("");
-                    hero.alteraEnergy(now.getCost());
-                    buyQueue.remove();
-                    continue;
-
-                } else if (hero.getEnergy()<=now.getCost() && option==1){
-                    System.out.println("You don't have enough energy! The card was, therefore, discarded!");
-                    System.out.println("");
-                    trashQueue.add(now);
-                    buyQueue.remove();
-                    continue;
-                } else if (option==0){
-                    trashQueue.add(now);
-                    System.out.println("You discarded the " + now.getName() + "!");
-                    System.out.println("");
-                    buyQueue.remove();
+            if(hand.size()==0){
+                System.out.println("Your hand is empty, turn skipped");
+            }else{
+                for(int i=0;i<hand.size();i++){
+                    System.out.println("Current hand:");
+                    System.out.print((i+1) + ": ");
+                    hand.get(i).showDescription();
                 }
-            }
 
-            System.out.println("Press enter to use your cards. If you haven't picked any cards, your turn will be skipped.");
-            String novoholder = entrada.nextLine();
-            int t=hand.size();
-            if (hand.size()>0){
-                for (int i=0;i<hand.size();i++){
-                    Card now = hand.get(0);
-                    now.usar(enemy,hero);
-                    hand.remove(now);//descarta depois de usar
-                }
-            } else if (t==0){
-                System.out.println("Turn skipped!");
+                System.err.println("Select the number of the card you want to use or 0 to skip your turn.");
+                option = entrada.nextInt();
+                if(option>0 && option <= hand.size()){
+                    Card selecteCard = hand.get(option-1);
+                    if(hero.getEnergy()>=selecteCard.getCost()){
+                        selecteCard.usar(enemy, hero);
+                        hand.remove(selecteCard);
+                    }else{
+                        System.out.println("Not enough energy, turn skipped!");
+                    }
+                    
+                }else System.out.println("Turn skipped!");
             }
 
             //ataque do enemy

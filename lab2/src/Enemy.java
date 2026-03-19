@@ -40,4 +40,8 @@ public class Enemy extends Entity {
         System.out.println("");
     }
 
+    public void shield_placeholder(){
+        if(this.shield == 0);
+    }
+
 }

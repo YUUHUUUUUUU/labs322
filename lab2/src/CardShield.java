@@ -2,6 +2,7 @@ public class CardShield extends Card {
     private String name;
     private int cost;
     private int shield;
+    private String description;
 
     //construct
     public CardShield(String name, String description, int cost, int shield){
@@ -22,7 +23,7 @@ public class CardShield extends Card {
 
     //mostra status da carta
     public void showDescription(){
-        System.out.println(this.name + " (" + this.shield + " defense, -" + this.cost + " energy)");
+        System.out.println(this.name + ", " + this.description + " (" + this.shield + " defense, -" + this.cost + " energy)");
     }
 
     //custo da carta
