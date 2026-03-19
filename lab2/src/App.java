@@ -74,6 +74,8 @@ public class App {
             }
 
             System.out.println("Your turn to buy!\nPress the number of the card you want, 3 if you want both or 0 to skip.");
+            System.out.println("You have " + hero.getEnergy() + " energy.");
+            
 
             Card card1 = buyPile.removeLast();
             Card card2 = buyPile.removeLast();
@@ -84,25 +86,41 @@ public class App {
             card2.showDescription();
 
             int option = entrada.nextInt();
-            if(option == 1){
+            if(option == 1 && hero.getEnergy()>=card1.getCost()){
+
                 if(hand.size()<4){
                     hand.add(card1);
                     trashPile.add(card2);
                     System.out.println("You bought " + card1.getName());
+                    hero.alteraEnergy(card1.getCost());
                 } else System.out.println("Hand full!");
-            }else if(option == 2){
+
+            }else if(option == 2 && hero.getEnergy()>=card2.getCost()){
+
                 if(hand.size()<4){
                     hand.add(card2);
                     trashPile.add(card1);
-                    System.out.println("You bought " + card1.getName());
+                    hero.alteraEnergy(card2.getCost());
+                    System.out.println("You bought " + card2.getName());
                 } else System.out.println("Hand full!");
-            }else if(option == 3){
+
+            }else if(option == 3 && hero.getEnergy()>=card2.getCost() && hero.getEnergy()>=card1.getCost()){
                 if(hand.size()<3){
+
                     hand.add(card1);
                     hand.add(card2);
-                    System.out.println("You bought " + card1.getName() + "and " + card2.getName());
+                    System.out.println("You bought " + card1.getName() + " and " + card2.getName());
+                    hero.alteraEnergy(card1.getCost()+card2.getCost());
+
                 } else System.out.println("Hand full!");
-            }else System.out.println("Shop skipped!");
+
+            }else if (option!=2 && option!=1 && option!=3){
+
+                System.out.println("Shop skipped!");
+
+            } else {
+                System.out.println("You don't have enough energy to buy this/these card(s)! Turn skipped.");
+            }
 
             //inplement the peek ability with cost 1 to see what will be the enemy attack
 
@@ -110,6 +128,7 @@ public class App {
                 System.out.println("Your hand is empty, turn skipped");
             }else{
                 for(int i=0;i<hand.size();i++){
+                    System.out.println("");
                     System.out.println("Current hand:");
                     System.out.print((i+1) + ": ");
                     hand.get(i).showDescription();
@@ -119,14 +138,10 @@ public class App {
                 option = entrada.nextInt();
                 if(option>0 && option <= hand.size()){
                     Card selecteCard = hand.get(option-1);
-                    if(hero.getEnergy()>=selecteCard.getCost()){
-                        selecteCard.usar(enemy, hero);
-                        hand.remove(selecteCard);
-                    }else{
-                        System.out.println("Not enough energy, turn skipped!");
-                    }
+                    selecteCard.usar(enemy, hero);
+                    hand.remove(selecteCard);
                     
-                }else System.out.println("Turn skipped!");
+                } else System.out.println("Turn skipped!");
             }
 
             //ataque do enemy
@@ -136,6 +151,7 @@ public class App {
                 break;
             } else {
                 enemy.attack(hero);
+                System.out.println(enemy.getName() + " attacked! You lost " + Math.max(1,enemy.getDanopadrao() - hero.getShield()) + " life!");
             }
 
             //verifica se hero esta vivo

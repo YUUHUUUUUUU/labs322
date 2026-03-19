@@ -20,10 +20,6 @@ public abstract class Entity {
         return this.life;
     }
 
-    public int getShield(){
-        return this.shield;
-    }
-
     public void setShield(int value){
         this.shield+=value;
     }
@@ -37,6 +33,8 @@ public abstract class Entity {
     public abstract void receiveDamage(int damage);
 
     public abstract void showStatus();
+
+    public abstract int getShield();
 
     //public abstract void shield();
 

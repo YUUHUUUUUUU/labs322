@@ -28,6 +28,10 @@ public class Enemy extends Entity {
         return Math.max(this.dano_padrao-hero.getShield(),1);
     }
 
+    public int getDanopadrao(){
+        return this.dano_padrao;
+    }
+
     //mostra o status do inimigo
     public void showStatus(){
         System.out.println(this.name + " status:");
@@ -35,13 +39,17 @@ public class Enemy extends Entity {
     }
 
     public void attack(Entity hero){
-        hero.receiveDamage(Math.max(this.dano_padrao-hero.getShield(),1));
-        System.out.println(this.name + " attacked! " + "You lost " + (Math.max(this.dano_padrao-hero.getShield(),1)) + " life!");
+        hero.receiveDamage(Math.max(this.dano_padrao- hero.getShield(),1));
+        //System.out.println(this.name + " attacked! " + "You lost " + (Math.max(this.dano_padrao - hero.getShield(),1)) + " life!");
         System.out.println("");
     }
 
     public void shield_placeholder(){
         if(this.shield == 0);
+    }
+
+    public int getShield(){
+        return this.shield;
     }
 
 }

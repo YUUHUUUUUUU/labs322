@@ -26,6 +26,10 @@ public class Hero extends Entity {
         this.life-=Math.max(1,damage-this.shield);
     }
 
+    public int getShield(){
+        return this.shield;
+    }
+
     //ganhando escudo
     public void increaseShield(int shield){
         this.shield+=shield;
