@@ -23,6 +23,7 @@ public class App {
         System.out.println("Press enter to start the duel!");
         System.out.println("You will regenerate " + heroi.getRegeneracao() + " points of energy each turn!");
         String placeholder = entrada.nextLine();
+        if(placeholder == "")//so para nao deixar amarelo
     
         //loob da batalha
         while(true){

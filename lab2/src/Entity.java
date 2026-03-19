@@ -1,7 +1,7 @@
 public abstract class Entity {
-    protected String name;
-    protected int life;
-    protected int shield;
+    private String name;
+    private int life;
+    private int shield;
 
     //MÉTODOS GERAIS:
 

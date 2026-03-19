@@ -9,8 +9,8 @@ public class App {
     public static void main(String[] args){
         //instanciando os decks
         ArrayList<Card> hand = new ArrayList<Card>();
-        Queue<Card> buyQueue = new LinkedList<Card>();
-        Queue<Card> trashQueue = new LinkedList<Card>();
+        ArrayList<Card> buyPile = new ArrayList<Card>();
+        ArrayList<Card> trashPile = new ArrayList<Card>();
         
         //todos os objetos
         Hero hero = new Hero("Nome", 45, 0, 5,3,hand);
@@ -18,8 +18,8 @@ public class App {
 
         CardDamage espada = new CardDamage("Espada","Strong attack", 5, 10);
         CardDamage tapa = new CardDamage("Tapa","Weak attack",2, 3);
-        CardDamage chute = new CardDamage("Chute","Energetic attack",4,10);
-        CardDamage soco = new CardDamage("Soco", "Medium attack", 3, 6);
+        CardDamage chute = new CardDamage("Chute","Energetic attack",4,7);
+        CardDamage soco = new CardDamage("Soco", "Medium attack", 3, 5);
 
         CardShield escudoferro = new CardShield("Escudo","Strong defense", 4, 7);
         CardShield escudoQuebrado = new CardShield("Escudo Quebradao","Weak defense", 2, 2);
@@ -38,7 +38,7 @@ public class App {
         general.add(escudomadeira);
 
         //escolhendo nome do hero
-        System.out.println("Enter your name to begin battle:");
+        System.out.println("Enter your name to start the battle:");
         Scanner entrada = new Scanner(System.in);
         String name = entrada.nextLine();
         hero.setName(name);
@@ -48,6 +48,7 @@ public class App {
         System.out.println("Press enter to start the duel!");
         System.out.println("You will regenerate " + hero.getRegeneration() + " points of energy each turn!");
         String placeholder = entrada.nextLine();
+        if(placeholder == "")//tira o erro por nao usar a variavel
     
         //loob da batalha
         while(true){
@@ -61,41 +62,35 @@ public class App {
 
 
             //TURNO DO HERÒI:
-
-            if (trashQueue.size()==0){ //se a pilha de lixo estiver vazia
-                Collections.shuffle(general);
-                int i=0;
-                while(i<=2){
-
-                    buyQueue.add(general.get(0));
-
-                    //tira do cmc do geral e poe no fim
-                    Card aux = general.get(0);
-                    general.remove(0);
-                    general.add(aux);
-                    i++;
-                }
-            } else {
-                buyQueue.addAll(trashQueue);//transforma o lixo na nova fila de compra
-
-                int s=buyQueue.size();
-                while(s<4){//adiciona mais valores a compra se nao tiver 3
-
-                    buyQueue.add(general.get(0));
-
-                    //tira do cmc do geral e poe no fim
-                    Card aux = general.get(0);
-                    general.remove(0);
-                    general.add(aux);
-                    s++;
-                }
+            if(general.size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
+                trashPile.addAll(general);
+                general.clear();
+                trashPile.shuffle();
+                general.addAll(trashPile);
+                trashPile.clear();
             }
 
-            int contador=0;
+            System.out.println("Your turn to buy!\nPress the number of the card you want, 3 if you want both or 0 to skip.");
+
+            buyPile.add(general.removeLast());
+            buyPile.add(general.removeLast());
+
+            System.out.print("1: ");
+            buyPile.get(0).showDescription();
+            System.out.print("2: ");
+            buyPile.get(1).showDescription();
+
+            int option = entrada.nextInt();
+            if(option == 1){
+                hand.add(buyPile.get(0));
+                trashPile.add(buyPile.get(1))
+                buyPile.clear();
+            }
+
+            
+
             while (buyQueue.size()>0 && contador<3){
-                System.out.println("Your turn to buy!");
-                Card now = buyQueue.peek();
-                System.out.println("You have " + hero.getEnergy() + " energy.");
+
 
                 System.out.println("If you want to buy " + now.getName() + " press 1. Otherwise, press 0.");
                 now.showDescription();
@@ -106,7 +101,6 @@ public class App {
 
 
                 if (option==1 && hero.getEnergy()>=now.getCost()){
-
                     hand.add(now);
                     System.out.println(now.getName() + " was acquired!");
                     System.out.println("");
