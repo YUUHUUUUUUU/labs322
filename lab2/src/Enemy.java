@@ -35,8 +35,8 @@ public class Enemy extends Entity {
     }
 
     public void attack(Entity hero){
-        hero.receiveDamage(dano_padrao);
-        System.out.println(this.name + " attacked! " + "You lost " + dano_padrao + " life!");
+        hero.receiveDamage(Math.max(this.dano_padrao-hero.getShield(),1));
+        System.out.println(this.name + " attacked! " + "You lost " + (Math.max(this.dano_padrao-hero.getShield(),1)) + " life!");
         System.out.println("");
     }
 
