@@ -3,8 +3,6 @@ public abstract class Entity{
     private int life;
     private int shield;
 
-    //MÉTODOS GERAIS:
-
     public Entity(String name, int life, int shield){
         this.life=life;
         this.name=name;
@@ -24,7 +22,7 @@ public abstract class Entity{
         return this.shield;
     }
     public void setShield(int value){
-        this.shield+=value;
+        this.shield=value;
     }
     public void increaseShield(int shield){
         this.shield+=shield;

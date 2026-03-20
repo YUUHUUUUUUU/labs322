@@ -1,7 +1,6 @@
 public class Enemy extends Entity{
     private int dano_padrao;
 
-    //construct
     public Enemy(String name, int life, int shield, int dano_padrao){
 
         super(name,life,shield);

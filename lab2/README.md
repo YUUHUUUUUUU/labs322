@@ -10,6 +10,6 @@ O tipo carta abstrato, por outro lado, tem em comum as funções de getCost, get
 
 # Baralho
 
-Implementamos dois baralhos: de compra e lixo. A cada rodada, o herói pode comprar 0, 1 ou 2 cartas. O de lixo recebe as cartas não compradas pelo herói. A mão do herói é uma terceira lista de cartas com no máximo 3 elementos que contém as cartas compradas mas não usadas ainda. O de compra tem na verdade 8 espaços para as 8 cartas criadas, mas a cada rodada só mostra 2, e quando fica vazio, é "reposto" pelo de lixo e embaralhado, de forma que o jogador é forçado a usar todas as cartas.
+Implementamos dois baralhos: de compra e lixo. A cada rodada, o herói pode comprar 0, 1 ou 2 cartas. O de lixo recebe as cartas não compradas pelo herói. A mão do herói é uma terceira lista de cartas com no máximo 4 elementos que contém as cartas compradas mas não usadas ainda. O de compra começa com as 8 cartas e a cada rodada disponibiliza 2 para compra, e quando fica vazio, é "reposto" pelo de lixo e embaralhado, de forma que o jogo tem um elemendo de randomização mas após 4 rodadas o baralho cicla.
 
-Além disso, fizemos o jogador gastar energia na hora em que ele compra as cartas, e não na hora de usá-las, de maneira que limitemos a compra de cartas por parte do herói.
+Fizemos o jogador gastar energia na hora em que ele compra as cartas, de maneira que limitemos a compra de cartas por parte do herói.
