@@ -1,0 +1,14 @@
+# Java compiled output
+*.class
+*.jar
+bin/
+
+# VS Code settings
+.vscode/
+
+# IntelliJ IDEA (caso algum colega use)
+.idea/
+*.iml
+
+# macOS metadata
+.DS_Store
