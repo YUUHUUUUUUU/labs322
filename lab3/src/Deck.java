@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Deck{
     private ArrayList<Card> hand = new ArrayList<Card>();
@@ -17,6 +18,10 @@ public class Deck{
     }
     public ArrayList<Card> getTrash() {
         return trash;
+    }
+
+    public void shuffle_shop(){
+        Collections.shuffle(shop);
     }
 
     //maybe implement the reShuffle, pop, etc here, but it is already possible to do everything with the getters
