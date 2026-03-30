@@ -1,0 +1,14 @@
+Made the game more symetric and less hero centric: Now that the enemy will be able to use cards the same way as we do,
+I turned the actions into things with a user and opponent, or user and target, so that it makes sense for both the hero
+and the enemy.
+
+Designed and implemented the relation between the publisher, effect and entity (user/target): Each entity has two publishers,
+one for the beggining of their round and one for the end. To inflict an effect to a entity, use effect.subscribe(entity).
+This will decide which subscriber to use based on effect.timingIsEnd and then create a copy of the effect and call the
+subcriber.subscribe(effect) on it.
+
+Designed the Combat Class: Check the comments, missing implementation.
+
+Implemented PoisonEffect
+
+

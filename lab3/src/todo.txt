@@ -1,0 +1,6 @@
+Some classes still have some bizarre constructors that doesn't respect inheritance. Change it with the propper
+use of super (RUAS)
+
+Implement more effects and finish the CardEffect (check PoisonEffect for reference)
+
+Finish Combat implementation (check comments)
