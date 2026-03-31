@@ -80,7 +80,7 @@ public class App{
 
         Combat combat = new Combat(hero, enemy);
         combat.combatLoop();
-        
+
         nome.close();
     }
 }
