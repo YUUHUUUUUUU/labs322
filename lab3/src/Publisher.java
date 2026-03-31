@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class Publisher{
-    private ArrayList<Effect> effects;
+    private ArrayList<Effect> effects = new ArrayList<Effect>();
     Entity target;
 
     Publisher(Entity target){
@@ -13,7 +13,7 @@ public class Publisher{
         effects.add(effectCopy);
     }
 
-    public void unsubscribe(Effect effect){//maybe we should destroy the effect to avoid memory leak
+    public void unsubscribe(Effect effect){//maybe we should destroy the effect to avoid memory leak (actually no, garbage colector FTW!!!)
         effects.remove(effect);
     }
 

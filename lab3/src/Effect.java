@@ -3,7 +3,7 @@ public abstract class Effect{
     private String description;
     private int duration;
     private int intensity; //the meaning varies depending on the specific effect
-    private boolean timingIsEnd; //true if the effect is activated at the beggining of the round
+    private boolean timingIsEnd; //true if the effect is activated at the end of the round
     private boolean isBuff; //true if the effect is a buff and false if it is a debuff
 
     public Effect(String name, String description, int duration, int intensity, boolean timingIsEnd, boolean isBuff){
@@ -11,8 +11,8 @@ public abstract class Effect{
         this.description = description;
         this.duration = duration;
         this.intensity = intensity;
-        this.timingIsEnd = timingIsEnd; //this atribute should be determined by the type of effect
-        this.isBuff = isBuff;
+        this.timingIsEnd = timingIsEnd; //this atribute should be determined by the type of effect in the 'super'
+        this.isBuff = isBuff; //idem
     }
 
     public abstract Effect copy();

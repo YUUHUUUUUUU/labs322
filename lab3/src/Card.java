@@ -24,7 +24,7 @@ public abstract class Card{
         return this.name;
     }
 
-    public String getDescription(Entity target){
+    public String getDescription(){
         return this.description;
     }
 }

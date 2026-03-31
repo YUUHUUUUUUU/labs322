@@ -1,8 +1,5 @@
 public class CardDamage extends Card{
-    private String name;
-    private int cost;
     private int damage;
-    private String description;
     private Effect effect = null;
     
     //construct
@@ -19,7 +16,7 @@ public class CardDamage extends Card{
     //usa a carta durante a batalha
     public void use(Entity user, Entity opponent){
         opponent.receiveDamage(this.damage);
-        System.out.println(user.getName() + " used " + this.name);
+        System.out.println(user.getName() + " used " + this.getName());
         System.out.println(opponent.getName() + " lost " + this.damage + " life!");
         if(effect != null){
             effect.subscribe(opponent);
@@ -30,6 +27,6 @@ public class CardDamage extends Card{
 
     //mostra dados da carta
     public void showDescription(){
-        System.out.println(this.name + ", " + this.description + " (" + this.damage + " damage, -" + this.cost + " energy)");
+        System.out.println(this.getName() + ", " + this.getDescription() + " (" + this.damage + " damage, -" + this.getCost() + " energy)");
     }
 }

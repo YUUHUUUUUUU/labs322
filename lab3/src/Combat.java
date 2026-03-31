@@ -14,9 +14,10 @@ public class Combat{
     private void heroTurn(){
         Scanner entrada = new Scanner(System.in);
 
-
-        //faz tudo com os feitiços iniciais
+        //faz tudo com os efeitos iniciais
         hero.getBegginningPublisher().updateAll();
+
+        if(!hero.isAlive())return;
 
         hero.setShield(0);
 
@@ -38,7 +39,6 @@ public class Combat{
 
         System.out.println("Your turn to buy!\nPress the number of the card you want, 3 if you want both or 0 to skip.");
         System.out.println("You have " + hero.getEnergy() + " energy.");
-        
 
         Card card1 = hero.getDeck().getShop().removeLast();
         Card card2 = hero.getDeck().getShop().removeLast();
@@ -97,11 +97,11 @@ public class Combat{
                 hero.getDeck().getHand().get(i).showDescription();
             }
 
-            System.err.println("Select the number of the card you want to use or 0 to skip your turn.");
+            System.out.println("Select the number of the card you want to use or 0 to skip your turn.");
             option = entrada.nextInt();
             if(option>0 && option <= hero.getDeck().getHand().size()){
                 Card selecteCard = hero.getDeck().getHand().get(option-1);
-                selecteCard.use(enemy, hero);
+                selecteCard.use(hero, enemy);
                 hero.getDeck().getHand().remove(selecteCard);
                 
             } else System.out.println("Turn skipped!");
@@ -115,11 +115,12 @@ public class Combat{
         //use the Deck class for the hand, trash and shop
 
         hero.getEndPublisher().updateAll();
-        entrada.close();
     }
 
     private void enemyTurn(){
         enemy.getBegginningPublisher().updateAll();
+
+        if(!enemy.isAlive())return;
 
         if(enemy.getDeck().getShop().size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
             enemy.getDeck().getTrash().addAll(enemy.getDeck().getShop());
@@ -130,13 +131,13 @@ public class Combat{
             enemy.getDeck().getShop().addAll(enemy.getDeck().getTrash());
             enemy.getDeck().getTrash().clear();
         }
-        System.out.println(enemy.getName()+ " has " + enemy.getEnergy() + " energy.");
+        //System.out.println(enemy.getName()+ " has " + enemy.getEnergy() + " energy.");
         
         Card card1 = enemy.getDeck().getShop().removeLast();
         Card card2 = enemy.getDeck().getShop().removeLast();
 
-        card1.showDescription();
-        card2.showDescription();
+        //card1.showDescription();
+        //card2.showDescription();
 
         Random rng = new Random();
         int option=rng.nextInt(5);
@@ -174,22 +175,20 @@ public class Combat{
             System.out.println("Shop skipped by "+ enemy.getName() + "!");
 
         } else {
-            System.out.println(enemy.getName() + " doesn't have enough energy to buy this/these card(s)! His turn was skipped.");
+            System.out.println(enemy.getName() + "Turn skipped.");
         }
 
-        //inplement the peek ability with cost 1 to see what will be the enemy attack
-
         if(enemy.getDeck().getHand().size()==0){
-            System.out.println("Your hand is empty, turn skipped");
+            System.out.println("Hand empty, turn skipped");
         }else{
-            for(int i=0;i<enemy.getDeck().getHand().size();i++){
-                System.out.println("");
-                System.out.println("Current hand:");
-                System.out.print((i+1) + ": ");
-                enemy.getDeck().getHand().get(i).showDescription();
-            }
+            // for(int i=0;i<enemy.getDeck().getHand().size();i++){
+            //     System.out.println("");
+            //     System.out.println("Current hand:");
+            //     System.out.print((i+1) + ": ");
+            //     enemy.getDeck().getHand().get(i).showDescription();
+            // }
 
-            System.err.println("Select the number of the card you want to use or 0 to skip your turn.");
+            //System.out.println("Select the number of the card you want to use or 0 to skip your turn."); //keep for debug
             option = rng.nextInt(enemy.getDeck().getHand().size()+1);
             if(option>0 && option <= enemy.getDeck().getHand().size()){
                 Card selecteCard = enemy.getDeck().getHand().get(option-1);
@@ -199,39 +198,33 @@ public class Combat{
             } else System.out.println("Turn skipped!");
         }
 
-        //implement the enemy turn
-
-        //remember to use effect.isBuff to decide the target
-        //buffs are used on themself and debuffs on the opponent,
-        //otherwise the enemy turn is basically the same as the hero's,
-        //but without the prints we used to interact with the game and,
-        //instead we will use a RNG
-
         enemy.getEndPublisher().updateAll();
     }
 
     public void combatLoop(){
         while (true){
-
-            if (hero.isAlive() && enemy.isAlive()){
-
-                heroTurn();
-                enemyTurn();
-                hero.regenerate();
-                System.out.println("You regenerated " + hero.getEnergyRegeneration() + " energy!");
-                System.out.println("-----------------------------------");
-
-            } else if (!hero.isAlive()){
-
+            heroTurn();
+            if(!hero.isAlive()){
                 System.out.println("You died!");
-                break;
-
-            } else if (!enemy.isAlive()){
-
+                return;
+            }
+            if(!enemy.isAlive()){
                 System.out.println("You win!");
                 break;
-
             }
+            
+            enemyTurn();
+            if(!hero.isAlive()){
+                System.out.println("You died!");
+                return;
+            }
+            if(!enemy.isAlive()){
+                System.out.println("You win!");
+                break;
+            }
+
+            hero.regenerate();
+            enemy.regenerate();
         }
     }
 }
