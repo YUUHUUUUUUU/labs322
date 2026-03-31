@@ -1,3 +1,4 @@
+package main.java;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
@@ -80,7 +81,7 @@ public class App{
 
         Combat combat = new Combat(hero, enemy);
         combat.combatLoop();
-        
+
         nome.close();
     }
 }

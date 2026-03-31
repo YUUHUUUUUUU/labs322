@@ -1,4 +1,5 @@
-public class CardShield extends Card{
+package main.java;
+public class CardShield extends Card {
     private int shield;
 
     //construct
@@ -7,11 +8,12 @@ public class CardShield extends Card{
         this.shield=shield;
     }
 
-    //usa a carta durante a batalha
-    public void usar(Enemy enemy, Hero hero){
-        hero.increaseShield(this.shield);
+    //use the card during combat
+    public void use(Entity user, Entity opponent){
+        user.increaseShield(this.shield);
+        //hero.alteraEnergy(this.cost);
         System.out.println("Used " + this.getName());
-        System.out.println(hero.getName() + " gained " + this.shield + " shield!");
+        System.out.println(user.getName() + " gained " + this.shield + " shield!");
         System.out.println("");
     }
 
@@ -20,4 +22,8 @@ public class CardShield extends Card{
         System.out.println(this.getName() + ", " + this.getDescription() + " (" + this.shield + " defense, -" + this.getCost() + " energy)");
     }
 
+    //custo da carta
+    public int getCusto(){
+        return this.getCost();
+    }
 }

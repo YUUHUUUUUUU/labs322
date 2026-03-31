@@ -1,3 +1,4 @@
+package main.java;
 public class EnergyEffect extends Effect {
         EnergyEffect(String name, String description, int duration, int intensity){
         super(name, description, duration, intensity, true, true);
