@@ -50,42 +50,47 @@ public class Combat{
 
         int option = entrada.nextInt();
         if(option == 1 && hero.getEnergy()>=card1.getCost()){
-
             if(hero.getDeck().getHand().size()<4){
                 hero.getDeck().getHand().add(card1);
                 hero.getDeck().getTrash().add(card2);
                 System.out.println("You bought " + card1.getName());
                 hero.subtractEnergy(card1.getCost());
-            } else System.out.println("Hand full!");
-
+            } else{
+                hero.getDeck().getHand().add(card1);
+                hero.getDeck().getHand().add(card2);
+                System.out.println("Hand full!");
+            } 
         }else if(option == 2 && hero.getEnergy()>=card2.getCost()){
-
             if(hero.getDeck().getHand().size()<4){
                 hero.getDeck().getHand().add(card2);
                 hero.getDeck().getTrash().add(card1);
                 hero.subtractEnergy(card2.getCost());
                 System.out.println("You bought " + card2.getName());
-            } else System.out.println("Hand full!");
-
+            } else{
+                hero.getDeck().getHand().add(card1);
+                hero.getDeck().getHand().add(card2);
+                System.out.println("Hand full!");
+            } 
         }else if(option == 3 && hero.getEnergy()>=card2.getCost() + card1.getCost()){
             if(hero.getDeck().getHand().size()<3){
-
                 hero.getDeck().getHand().add(card1);
                 hero.getDeck().getHand().add(card2);
                 System.out.println("You bought " + card1.getName() + " and " + card2.getName());
                 hero.subtractEnergy(card1.getCost()+card2.getCost());
-
-            } else System.out.println("Hand full!");
-
+            } else{
+                hero.getDeck().getHand().add(card1);
+                hero.getDeck().getHand().add(card2);
+                System.out.println("Hand full!");
+            } 
         }else if (option!=2 && option!=1 && option!=3){
-
+            hero.getDeck().getTrash().add(card1);
+            hero.getDeck().getTrash().add(card2);
             System.out.println("Shop skipped!");
-
         } else {
+            hero.getDeck().getTrash().add(card1);
+            hero.getDeck().getTrash().add(card2);
             System.out.println("You don't have enough energy to buy this/these card(s)! Turn skipped.");
         }
-
-        //inplement the peek ability with cost 1 to see what will be the enemy attack
 
         if(hero.getDeck().getHand().size()==0){
             System.out.println("Your hand is empty, turn skipped");
@@ -123,15 +128,11 @@ public class Combat{
         if(!enemy.isAlive())return;
 
         if(enemy.getDeck().getShop().size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
-            enemy.getDeck().getTrash().addAll(enemy.getDeck().getShop());
-            enemy.getDeck().getShop().clear();
-
-            Collections.shuffle(enemy.getDeck().getTrash());
-
             enemy.getDeck().getShop().addAll(enemy.getDeck().getTrash());
             enemy.getDeck().getTrash().clear();
+
+            Collections.shuffle(enemy.getDeck().getShop());
         }
-        //System.out.println(enemy.getName()+ " has " + enemy.getEnergy() + " energy.");
         
         Card card1 = enemy.getDeck().getShop().removeLast();
         Card card2 = enemy.getDeck().getShop().removeLast();
@@ -143,39 +144,46 @@ public class Combat{
         int option=rng.nextInt(5);
 
         if(option == 1 && enemy.getEnergy()>=card1.getCost()){
-
             if(enemy.getDeck().getHand().size()<4){
                 enemy.getDeck().getHand().add(card1);
                 enemy.getDeck().getTrash().add(card2);
                 System.out.println(enemy.getName() + " bought " + card1.getName());
                 enemy.subtractEnergy(card1.getCost());
-            } else System.out.println("Hand full!");
-
+            } else{
+                enemy.getDeck().getTrash().add(card1);
+                enemy.getDeck().getTrash().add(card2);
+                System.out.println("Hand full!");
+            } 
         }else if(option == 2 && enemy.getEnergy()>=card2.getCost()){
-
             if(enemy.getDeck().getHand().size()<4){
                 enemy.getDeck().getHand().add(card2);
                 enemy.getDeck().getTrash().add(card1);
                 enemy.subtractEnergy(card2.getCost());
                 System.out.println(enemy.getName() + " bought " + card2.getName());
-            } else System.out.println("Hand full!");
-
+            }else{
+                enemy.getDeck().getTrash().add(card1);
+                enemy.getDeck().getTrash().add(card2);
+                System.out.println("Hand full!");
+            }
         }else if(option == 3 && enemy.getEnergy()>=card2.getCost()+card1.getCost()){
             if(enemy.getDeck().getHand().size()<3){
-
                 enemy.getDeck().getHand().add(card1);
                 enemy.getDeck().getHand().add(card2);
                 System.out.println(enemy.getName() + " bought " + card1.getName() + " and " + card2.getName());
                 enemy.subtractEnergy(card1.getCost()+card2.getCost());
-
-            } else System.out.println("Hand full!");
-
+            }else{
+                enemy.getDeck().getTrash().add(card1);
+                enemy.getDeck().getTrash().add(card2);
+                System.out.println("Hand full!");
+            } 
         }else if (option!=2 && option!=1 && option!=3){
-
             System.out.println("Shop skipped by "+ enemy.getName() + "!");
-
+            enemy.getDeck().getTrash().add(card1);
+            enemy.getDeck().getTrash().add(card2);
         } else {
-            System.out.println(enemy.getName() + "Turn skipped.");
+            System.out.println(enemy.getName() + " shop skipped!");
+            enemy.getDeck().getTrash().add(card1);
+            enemy.getDeck().getTrash().add(card2);
         }
 
         if(enemy.getDeck().getHand().size()==0){

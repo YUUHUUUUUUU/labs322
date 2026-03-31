@@ -6,7 +6,7 @@ public class PoisonEffect extends Effect{
 
     @Override
     public void use(Entity target) {
-        System.err.println(target.getName() + "received " + this.getIntensity() + " damage from poison");
+        System.err.println(target.getName() + " received " + this.getIntensity() + " damage from poison");
         target.receiveDirectDamage(this.getIntensity()); //not affected by shield
         this.reduceDuration();
     }

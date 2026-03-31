@@ -13,7 +13,7 @@ public class Publisher{
         effects.add(effectCopy);
     }
 
-    public void unsubscribe(Effect effect){//maybe we should destroy the effect to avoid memory leak (actually no, garbage colector FTW!!!)
+    public void unsubscribe(Effect effect){
         effects.remove(effect);
     }
 
@@ -23,7 +23,10 @@ public class Publisher{
     }
 
     public void updateAll(){
-        for(Effect effect : effects){
+
+        ArrayList<Effect> copy = new ArrayList<>(effects);
+
+        for(Effect effect : copy){
             notify(effect);
         }
     }

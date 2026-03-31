@@ -9,7 +9,8 @@ public class CardEffect extends Card{
 
     //use the card during battle
     public void use(Entity user, Entity opponent){
-        effect.subscribe(opponent);
+        if(effect.getIsBuff())effect.subscribe(opponent);
+        else effect.subscribe(opponent);
         System.out.println(user.getName() + " used " + this.getName());
         System.out.println("");
     }

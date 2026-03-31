@@ -5,7 +5,7 @@ public class EnergyEffect extends Effect {
 
     @Override
     public void use(Entity target) {
-        System.err.println(target.getName() + "received " + this.getIntensity() + " energy from potion");
+        System.err.println(target.getName() + " received " + this.getIntensity() + " energy from potion");
         target.subtractEnergy(-this.getIntensity());
         this.reduceDuration();
     }

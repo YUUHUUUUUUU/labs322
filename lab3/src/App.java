@@ -57,6 +57,7 @@ public class App{
         Collections.shuffle(hero.getDeck().getShop());
 
         enemy.getDeck().getShop().add(garra);
+        enemy.getDeck().getShop().add(garra);
         enemy.getDeck().getShop().add(mordida_venenosa);
         enemy.getDeck().getShop().add(esquiva);
         enemy.getDeck().getShop().add(tapa);
