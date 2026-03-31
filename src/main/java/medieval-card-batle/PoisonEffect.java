@@ -1,3 +1,4 @@
+package main.java;
 public class PoisonEffect extends Effect{
     
     PoisonEffect(String name, String description, int duration, int intensity){

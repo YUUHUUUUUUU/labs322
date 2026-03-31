@@ -1,3 +1,4 @@
+package main.java;
 public class CardShield extends Card {
     private int shield;
 
