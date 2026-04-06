@@ -2,13 +2,23 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Collections;
 
+/**
+ * Na app, usamos basicamente para declararmos os objetos em si: heróis, vilões, feitiços e cartas propriamente ditas.
+ */
+
 public class App{
 
     public static void main(String[] args){
-        //instanciando os decks
+        /** 
+        
+         * instanciando os decks
+         * o que esta sendo passado é um ponteiro pra hand
+         * futuras alteracoes no hand, alteram o deck
+         * 
+         * cada entidade (heroi e vilao) é completamente simétrica: ambas tem decks de mão, de compra e de lixo.
+         * Ambas tem escudo, cartas de ataque, efeitos e energia para seus ataques. a diferença é que o vilão faz tudo aleatoriamente.
+         */
 
-        //o que esta sendo passado é um ponteiro pra hand
-        //futuras alteracoes no hand, alteram o deck
         ArrayList<Card> hand_hero = new ArrayList<Card>();
         ArrayList<Card> hand_enemy = new ArrayList<Card>();
 
@@ -51,6 +61,9 @@ public class App{
         CardDamage especial = new CardDamage("Especial", "Costs are low but damage is huge",3,12);
 
 
+        /** 
+         * Aqui, cada deck de compra das entidades é criado e embaralhado.
+         */
         hero.getDeck().getShop().add(espada);
         hero.getDeck().getShop().add(chute);
         hero.getDeck().getShop().add(escudoQuebrado);
@@ -91,6 +104,11 @@ public class App{
         String placeholderr = nome.nextLine();
         if(placeholderr == null); //just so that placeholder is not yellow
 
+
+        /**
+         * Chamamos o combate para iniciarmos os loops de batalha!
+         */
+        
         Combat combat = new Combat(hero, enemy);
         combat.combatLoop();
 
