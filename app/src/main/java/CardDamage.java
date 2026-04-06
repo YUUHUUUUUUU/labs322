@@ -1,4 +1,3 @@
-package main.java;
 public class CardDamage extends Card{
     private int damage;
     private Effect effect = null;

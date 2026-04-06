@@ -1,4 +1,3 @@
-package main.java;
 public class CardEffect extends Card{
     private Effect effect;
     

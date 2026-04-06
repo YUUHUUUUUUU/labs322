@@ -1,4 +1,4 @@
-package main.java;
+
 public class Hero extends Entity{
 
     //Now that the enemy also uses cards, enemy and hero are completely symetric and the subclasses are no longer needed
