@@ -17,7 +17,9 @@ public class Combat{
         //faz tudo com os efeitos iniciais
         hero.getBegginningPublisher().updateAll();
 
-        if(!hero.isAlive())return;
+        if(!hero.isAlive()){
+            return;
+        }
 
         hero.setShield(0);
 
@@ -95,13 +97,12 @@ public class Combat{
         if(hero.getDeck().getHand().size()==0){
             System.out.println("Your hand is empty, turn skipped");
         }else{
+            System.out.println("Current hand:");
             for(int i=0;i<hero.getDeck().getHand().size();i++){
                 System.out.println("");
-                System.out.println("Current hand:");
                 System.out.print((i+1) + ": ");
                 hero.getDeck().getHand().get(i).showDescription();
             }
-
             System.out.println("Select the number of the card you want to use or 0 to skip your turn.");
             option = entrada.nextInt();
             if(option>0 && option <= hero.getDeck().getHand().size()){
@@ -120,6 +121,7 @@ public class Combat{
         //use the Deck class for the hand, trash and shop
 
         hero.getEndPublisher().updateAll();
+
     }
 
     private void enemyTurn(){
@@ -187,7 +189,7 @@ public class Combat{
         }
 
         if(enemy.getDeck().getHand().size()==0){
-            System.out.println("Hand empty, turn skipped");
+            System.out.println(enemy.getName() + " hand is empty, turn skipped");
         }else{
             // for(int i=0;i<enemy.getDeck().getHand().size();i++){
             //     System.out.println("");
@@ -212,23 +214,16 @@ public class Combat{
     public void combatLoop(){
         while (true){
             heroTurn();
-            if(!hero.isAlive()){
-                System.out.println("You died!");
-                return;
-            }
-            if(!enemy.isAlive()){
+            if(enemy.isAlive()){
+                enemyTurn();
+            } else {
                 System.out.println("You win!");
-                break;
+                return;
             }
             
-            enemyTurn();
             if(!hero.isAlive()){
                 System.out.println("You died!");
                 return;
-            }
-            if(!enemy.isAlive()){
-                System.out.println("You win!");
-                break;
             }
 
             hero.regenerate();

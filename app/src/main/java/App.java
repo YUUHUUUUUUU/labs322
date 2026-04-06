@@ -16,7 +16,7 @@ public class App{
         Deck deck_enemy = new Deck(hand_enemy);
         
         //heroi e inimigo
-        Hero hero = new Hero("Nome", 45, 0, 5,3, deck_hero);
+        Hero hero = new Hero("Nome", 25, 0, 5,4, deck_hero);
         Enemy enemy = new Enemy("IFGW", 20, 0,7,3, deck_enemy);
 
         //efeitos
@@ -24,10 +24,12 @@ public class App{
         Effect energyBuff  = new EnergyEffect("Energy Buff", "Regenerates Energy", 3, 3);
         Effect poison = new PoisonEffect("Poison", "Strong Poison", 2, 4);
         Effect mordidaVeneno = new PoisonEffect("Poisoned bite", "Poison present in the creature's teeth",2,3);
-        
+        Effect endurecimento_permanente = new PoisonEffect("Permanent rigid skin", "For 5 rounds, the creature maintains a shield of strength 4", 5, 4);
+
         //cartas do heroi
         CardDamage espada = new CardDamage("Espada","Strong attack", 5, 10);
         CardDamage chute = new CardDamage("Chute","Energetic attack",4,7);
+        CardDamage cutuvelada = new CardDamage("Cutuvelada","Medium attack", 3, 5);
 
         CardShield escudoFerro = new CardShield("Escudo","Strong defense", 4, 7);
         CardShield escudoQuebrado = new CardShield("Escudo Quebradao","Weak defense", 2, 2);
@@ -36,13 +38,17 @@ public class App{
 
         CardEffect poisonCard = new CardEffect("poison", "Strong Poison", 5, poison);
         CardEffect energyRegenCard = new CardEffect("energy buff", "regenerates energy", 4, energyBuff);
+        CardEffect shieldIncreaseCard = new CardEffect ("shield buff", "increases shield",5,endurecimento_permanente);
 
         //cartas do inimigo
         CardDamage garra = new CardDamage("Garra", "Strong attack", 6,8);
         CardDamage mordida_venenosa = new CardDamage("Mordida Venenosa", "Medium attack, but with poison that infects the opponent", 7, 7,mordidaVeneno);
-        CardShield esquiva = new CardShield("Esquivada sinistra","Dodge the opponent's attack", 2, 2);
+        CardShield endurecer_pele = new CardShield("Pele endurecida","Weak instantaneous defense", 1, 2);
+        CardShield esquiva = new CardShield("Esquivada sinistra","Dodge the opponent's attack", 2, 3);
         CardDamage tapa = new CardDamage("Tapa","Weak attack",2, 3);
         CardDamage soco = new CardDamage("Soco", "Medium attack", 3, 5);
+        CardDamage cuspida = new CardDamage("Cuspida","Really weak Attack", 1, 2);
+        CardDamage especial = new CardDamage("Especial", "Costs are low but damage is huge",3,12);
 
 
         hero.getDeck().getShop().add(espada);
@@ -54,6 +60,8 @@ public class App{
         hero.getDeck().getShop().add(poisonCard);
         hero.getDeck().getShop().add(energyRegenCard);
 
+        hero.getDeck().getShop().add(cutuvelada);
+
         Collections.shuffle(hero.getDeck().getShop());
 
         enemy.getDeck().getShop().add(garra);
@@ -62,6 +70,11 @@ public class App{
         enemy.getDeck().getShop().add(esquiva);
         enemy.getDeck().getShop().add(tapa);
         enemy.getDeck().getShop().add(soco);
+
+        enemy.getDeck().getShop().add(endurecer_pele);
+        enemy.getDeck().getShop().add(especial);
+        enemy.getDeck().getShop().add(cuspida);
+        enemy.getDeck().getShop().add(shieldIncreaseCard);
         Collections.shuffle(enemy.getDeck().getShop());
 
         //escolhendo nome do hero

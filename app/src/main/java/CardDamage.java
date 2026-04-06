@@ -1,3 +1,4 @@
+
 public class CardDamage extends Card{
     private int damage;
     private Effect effect = null;
@@ -17,7 +18,7 @@ public class CardDamage extends Card{
     public void use(Entity user, Entity opponent){
         opponent.receiveDamage(this.damage);
         System.out.println(user.getName() + " used " + this.getName());
-        System.out.println(opponent.getName() + " lost " + this.damage + " life!");
+        System.out.println(opponent.getName() + " lost " + Math.max(this.damage-opponent.getShield(),1) + " life!");
         if(effect != null){
             effect.subscribe(opponent);
             System.err.println(opponent.getName() + " was inflicted with " + effect.getName() + " (" + effect.useDescription() + ")");

@@ -16,6 +16,6 @@ public class CardEffect extends Card{
     }
 
     public void showDescription(){
-        System.out.println(this.getName() + ", " + this.getDescription() + " (" + this.effect.useDescription() + ")");
+        System.out.println(this.getName() + ", " + this.getDescription() + " (" + this.effect.useDescription() + ", -" + this.getCost() + " energy" + ")");
     }
 }
