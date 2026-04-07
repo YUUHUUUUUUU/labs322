@@ -20,14 +20,15 @@ public class App{
          */
 
         ArrayList<Card> hand_hero = new ArrayList<Card>();
-        ArrayList<Card> hand_enemy = new ArrayList<Card>();
 
         Deck deck_hero = new Deck(hand_hero);
-        Deck deck_enemy = new Deck(hand_enemy);
+        Deck deck_enemy_default = new Deck(hand_enemy);
         
-        //heroi e inimigo
+        //heroi
         Hero hero = new Hero("Nome", 25, 0, 5,4, deck_hero);
-        Enemy enemy = new Enemy("IFGW", 20, 0,7,3, deck_enemy);
+
+        //inimigos
+
 
         //efeitos
 
@@ -48,17 +49,6 @@ public class App{
 
         CardEffect poisonCard = new CardEffect("poison", "Strong Poison", 5, poison);
         CardEffect energyRegenCard = new CardEffect("energy buff", "regenerates energy", 4, energyBuff);
-        CardEffect shieldIncreaseCard = new CardEffect ("shield buff", "increases shield",5,endurecimento_permanente);
-
-        //cartas do inimigo
-        CardDamage garra = new CardDamage("Garra", "Strong attack", 6,8);
-        CardDamage mordida_venenosa = new CardDamage("Mordida Venenosa", "Medium attack, but with poison that infects the opponent", 7, 7,mordidaVeneno);
-        CardShield endurecer_pele = new CardShield("Pele endurecida","Weak instantaneous defense", 1, 2);
-        CardShield esquiva = new CardShield("Esquivada sinistra","Dodge the opponent's attack", 2, 3);
-        CardDamage tapa = new CardDamage("Tapa","Weak attack",2, 3);
-        CardDamage soco = new CardDamage("Soco", "Medium attack", 3, 5);
-        CardDamage cuspida = new CardDamage("Cuspida","Really weak Attack", 1, 2);
-        CardDamage especial = new CardDamage("Especial", "Costs are low but damage is huge",3,12);
 
 
         /** 
@@ -77,18 +67,18 @@ public class App{
 
         Collections.shuffle(hero.getDeck().getShop());
 
-        enemy.getDeck().getShop().add(garra);
-        enemy.getDeck().getShop().add(garra);
-        enemy.getDeck().getShop().add(mordida_venenosa);
-        enemy.getDeck().getShop().add(esquiva);
-        enemy.getDeck().getShop().add(tapa);
-        enemy.getDeck().getShop().add(soco);
+        enemy1.getDeck().getShop().add(garra);
+        enemy1.getDeck().getShop().add(garra);
+        enemy1.getDeck().getShop().add(mordida_venenosa);
+        enemy1.getDeck().getShop().add(esquiva);
+        enemy1.getDeck().getShop().add(tapa);
+        enemy1.getDeck().getShop().add(soco);
 
-        enemy.getDeck().getShop().add(endurecer_pele);
-        enemy.getDeck().getShop().add(especial);
-        enemy.getDeck().getShop().add(cuspida);
-        enemy.getDeck().getShop().add(shieldIncreaseCard);
-        Collections.shuffle(enemy.getDeck().getShop());
+        enemy1.getDeck().getShop().add(endurecer_pele);
+        enemy1.getDeck().getShop().add(especial);
+        enemy1.getDeck().getShop().add(cuspida);
+        enemy1.getDeck().getShop().add(shieldIncreaseCard);
+        Collections.shuffle(enemy1.getDeck().getShop());
 
         //escolhendo nome do hero
         System.out.println("Enter your name to start the battle:");
@@ -109,8 +99,8 @@ public class App{
          * Chamamos o combate para iniciarmos os loops de batalha!
          */
         
-        Combat combat = new Combat(hero, enemy);
-        combat.combatLoop();
+        Campanha campanha = new Campanha(enemy1, enemy2, enemy3, enemy4, boss);
+        campanha.campanha_loop(hero);
 
         nome.close();
     }

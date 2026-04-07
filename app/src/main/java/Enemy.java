@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 
 public class Enemy extends Entity{
 
@@ -10,5 +11,7 @@ public class Enemy extends Entity{
     public Enemy(String name, int life, int shield, int energy, int energyRegeneration, Deck deck){
         super(name, life, shield, energy, energyRegeneration, deck);
     }
+
+
 
 }
