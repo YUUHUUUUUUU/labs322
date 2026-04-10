@@ -2,20 +2,35 @@ import java.util.Collections;
 import java.util.Scanner;
 import java.util.Random;
 
+/**
+ * Controla o fluxo e as regras da batalha no jogo.
+ * Gerencia a alternância de turnos, o sistema de compras de cartas,
+ * o uso de energia e a vida das entidades.
+ */
 public class Combat{
     Hero hero;
-    Enemy enemy; //could be changed to be a list of heroes and enemys in the future
+    Enemy enemy; //could be changed to be a list of heroes and enemies in the future
         
+    /**
+     * Construtor da classe de combate.
+     * @param hero A entidade herói controlada pelo jogador.
+     * @param enemy A entidade inimiga controlada pelo sistema.
+     */
     Combat(Hero hero, Enemy enemy){
         this.hero = hero;
         this.enemy = enemy;
     }
 
+    /**
+     * Executa a lógica do turno do jogador (Herói).
+     * Aplica efeitos iniciais, exibe o status de combate, gerencia a compra 
+     * de cartas da loja e permite a seleção e uso de cartas da mão.
+     */
     private void heroTurn(){
-        Scanner entrada = new Scanner(System.in);
+        Scanner scanner = new Scanner(System.in);
 
-        //faz tudo com os efeitos iniciais
-        hero.getBegginningPublisher().updateAll();
+        // Faz o update dos efeitos que devem ser aplicados no início do turno
+        hero.getBeginningPublisher().updateAll();
 
         if(!hero.isAlive()){
             return;
@@ -23,13 +38,13 @@ public class Combat{
 
         hero.setShield(0);
 
-        //exibindo status do hero e enemy
+        // Exibe status do hero e enemy
         hero.showStatus();
         System.out.println("-----------------------");
         enemy.showStatus();
         System.out.println("-----------------------");
 
-        //TURNO DO HERÒI:
+        // Compra de cartas
         if(hero.getDeck().getShop().size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
             hero.getDeck().getTrash().addAll(hero.getDeck().getShop());
             hero.getDeck().getShop().clear();
@@ -50,7 +65,7 @@ public class Combat{
         System.out.print("2: ");
         card2.showDescription();
 
-        int option = entrada.nextInt();
+        int option = scanner.nextInt();
         if(option == 1 && hero.getEnergy()>=card1.getCost()){
             if(hero.getDeck().getHand().size()<4){
                 hero.getDeck().getHand().add(card1);
@@ -58,8 +73,8 @@ public class Combat{
                 System.out.println("You bought " + card1.getName());
                 hero.subtractEnergy(card1.getCost());
             } else{
-                hero.getDeck().getHand().add(card1);
-                hero.getDeck().getHand().add(card2);
+                hero.getDeck().getTrash().add(card1);
+                hero.getDeck().getTrash().add(card2);
                 System.out.println("Hand full!");
             } 
         }else if(option == 2 && hero.getEnergy()>=card2.getCost()){
@@ -69,8 +84,8 @@ public class Combat{
                 hero.subtractEnergy(card2.getCost());
                 System.out.println("You bought " + card2.getName());
             } else{
-                hero.getDeck().getHand().add(card1);
-                hero.getDeck().getHand().add(card2);
+                hero.getDeck().getTrash().add(card1);
+                hero.getDeck().getTrash().add(card2);
                 System.out.println("Hand full!");
             } 
         }else if(option == 3 && hero.getEnergy()>=card2.getCost() + card1.getCost()){
@@ -80,8 +95,8 @@ public class Combat{
                 System.out.println("You bought " + card1.getName() + " and " + card2.getName());
                 hero.subtractEnergy(card1.getCost()+card2.getCost());
             } else{
-                hero.getDeck().getHand().add(card1);
-                hero.getDeck().getHand().add(card2);
+                hero.getDeck().getTrash().add(card1);
+                hero.getDeck().getTrash().add(card2);
                 System.out.println("Hand full!");
             } 
         }else if (option!=2 && option!=1 && option!=3){
@@ -94,6 +109,7 @@ public class Combat{
             System.out.println("You don't have enough energy to buy this/these card(s)! Turn skipped.");
         }
 
+        // Uso das cartas em mãos
         if(hero.getDeck().getHand().size()==0){
             System.out.println("Your hand is empty, turn skipped");
         }else{
@@ -104,32 +120,30 @@ public class Combat{
                 hero.getDeck().getHand().get(i).showDescription();
             }
             System.out.println("Select the number of the card you want to use or 0 to skip your turn.");
-            option = entrada.nextInt();
+            option = scanner.nextInt();
             if(option>0 && option <= hero.getDeck().getHand().size()){
-                Card selecteCard = hero.getDeck().getHand().get(option-1);
-                selecteCard.use(hero, enemy);
-                hero.getDeck().getHand().remove(selecteCard);
+                Card selectedCard = hero.getDeck().getHand().get(option-1);
+                selectedCard.use(hero, enemy);
+                hero.getDeck().getHand().remove(selectedCard);
                 
             } else System.out.println("Turn skipped!");
         }
 
-        //implement the hero turn (basically the same as what is in the APP)
-
-        //remember to use effect.isBuff to decide the target
-        //buffs are used on themself and debuffs on the opponent
-        //notice that many of the functions changed name and/or implementation
-        //use the Deck class for the hand, trash and shop
-
         hero.getEndPublisher().updateAll();
-
     }
 
+    /**
+     * Executa a lógica automática do turno do inimigo.
+     * Utiliza geração de números aleatórios (RNG) para simular a tomada 
+     * de decisão de compras e uso de cartas.
+     */
     private void enemyTurn(){
-        enemy.getBegginningPublisher().updateAll();
+        enemy.getBeginningPublisher().updateAll();
 
         if(!enemy.isAlive())return;
 
-        if(enemy.getDeck().getShop().size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
+        // Se a loja tiver menos de 2 cartas, recicla o lixo
+        if(enemy.getDeck().getShop().size()<2){
             enemy.getDeck().getShop().addAll(enemy.getDeck().getTrash());
             enemy.getDeck().getTrash().clear();
 
@@ -145,6 +159,7 @@ public class Combat{
         Random rng = new Random();
         int option=rng.nextInt(5);
 
+        // Compra de cartas
         if(option == 1 && enemy.getEnergy()>=card1.getCost()){
             if(enemy.getDeck().getHand().size()<4){
                 enemy.getDeck().getHand().add(card1);
@@ -188,6 +203,7 @@ public class Combat{
             enemy.getDeck().getTrash().add(card2);
         }
 
+        // Uso das cartas em mãos
         if(enemy.getDeck().getHand().size()==0){
             System.out.println(enemy.getName() + " hand is empty, turn skipped");
         }else{
@@ -211,6 +227,9 @@ public class Combat{
         enemy.getEndPublisher().updateAll();
     }
 
+    /**
+     * Loop da batalha, que continua até que o inimigo ou herói morra
+     */
     public void combatLoop(){
         while (true){
             heroTurn();

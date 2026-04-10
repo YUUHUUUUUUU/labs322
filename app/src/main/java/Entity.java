@@ -1,4 +1,8 @@
-
+/**
+ * Classe base abstrata que representa qualquer entidade no combate (Hero ou Enemy).
+ * Gerencia os atributos principais das entidades: vida, escudo, energia,
+ * o Deck e os Publishers.
+ */
 public abstract class Entity {
     private String name;
     private int life;
@@ -9,7 +13,15 @@ public abstract class Entity {
     private Publisher endPublisher = new Publisher(this);
     private Deck deck;
 
-    //constructor
+    /**
+     * Construtor para inicializar os atributos da entidade.
+     * @param name O nome da entidade.
+     * @param life Os pontos de vida iniciais.
+     * @param shield Os pontos de escudo iniciais.
+     * @param energy A energia inicial disponível para jogar cartas.
+     * @param energyRegeneration A quantidade de energia recuperada no fim de cada turno.
+     * @param deck A instância do baralho associada a esta entidade.
+     */
     public Entity(String name, int life, int shield, int energy, int energyRegeneration, Deck deck){
         this.name = name;
         this.life = life;
@@ -31,9 +43,18 @@ public abstract class Entity {
     public int getLife(){
         return this.life;
     }
+    /**
+     * Verifica se a entidade ainda está viva.
+     * @return true se a vida for maior que 0, false caso contrário.
+     */
     public boolean isAlive(){
         return (this.life>0); 
     }
+    /**
+     * Aplica dano à entidade menos o valor atual do escudo.
+     * O dano é fixado como pelo menos 1 independente do valor do escudo.
+     * @param damage O valor bruto do dano recebido.
+     */
     public void receiveDamage(int damage){
         this.life-=Math.max(1,damage-this.shield);
     }
@@ -53,7 +74,7 @@ public abstract class Entity {
     }
     
     //publisher methods
-    public Publisher getBegginningPublisher(){
+    public Publisher getBeginningPublisher(){
         return this.beginningPublisher;
     }
     public Publisher getEndPublisher(){
@@ -79,6 +100,9 @@ public abstract class Entity {
         return this.deck;
     }
 
+    /**
+     * Exibe o status atual de vida e energia da entidade.
+     */
     public void showStatus(){
         System.out.println(this.name + " status:");
         System.out.println("Life: " + this.life);
