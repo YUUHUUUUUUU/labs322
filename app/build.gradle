@@ -7,8 +7,19 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
+    id 'java'
+    id 'jacoco'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jacocoTestReport {
+    dependsOn test
+    reports {
+        html.required = true // Gera o site com os resultados
+    }
 }
 
 repositories {
