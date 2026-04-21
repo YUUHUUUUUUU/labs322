@@ -16,7 +16,7 @@ public class CardFactory {
         Effect radiationSickness = new PoisonEffect("Radiation Sickness", "Damage caused by radiation, makes your cells die from the inside",3,25);
 
         // General Cards
-        cardTemplates.put("Coffe", new CardEffect("energy buff", "regenerates energy", 4, coffe));
+        cardTemplates.put("Coffe", new CardEffect("Coffe", "regenerates energy", 4, coffe));
 
         // Hero Cards
         cardTemplates.put("Ruler", new CardDamage("Ruler","Strong attack", 5, 40));
