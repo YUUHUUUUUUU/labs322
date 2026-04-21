@@ -26,7 +26,7 @@ public class Combat{
      * Aplica efeitos iniciais, exibe o status de combate, gerencia a compra 
      * de cartas da loja e permite a seleção e uso de cartas da mão.
      */
-    private void heroTurn(){
+    public void heroTurn(){
         Scanner scanner = new Scanner(System.in);
 
         // Faz o update dos efeitos que devem ser aplicados no início do turno
@@ -138,7 +138,7 @@ public class Combat{
      * Utiliza geração de números aleatórios (RNG) para simular a tomada 
      * de decisão de compras e uso de cartas.
      */
-    private void enemyTurn(){
+    public void enemyTurn(){
         enemy.getBeginningPublisher().updateAll();
 
         if(!enemy.isAlive())return;

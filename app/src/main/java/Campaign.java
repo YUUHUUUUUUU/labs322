@@ -65,8 +65,10 @@ public class Campaign {
                     currentOptions = adjacencyList.get(currentIndex);
                 }else if(choice ==2){
                     //implement save
+                    return;
                 }else{
                     //implement exception handling
+                    return;
                 }
             }else return;
         }

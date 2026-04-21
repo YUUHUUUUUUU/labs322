@@ -1,0 +1,7 @@
+gradle wrapper
+
+./gradlew jacocoTestReport
+
+./gradlew build
+
+./gradlew run
