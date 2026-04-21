@@ -1,17 +1,18 @@
 /**
- * Classe abstrata que gera as classes de carta especificas, com metodos abstratos
+ * Representa uma carta de escudo no jogo.
+ * Quando utilizada, aumenta os pontos de escudo da entidade 
+ * que a jogou por uma rodada.
  */
-
 public abstract class Card{
     private String name;
     private String description;
     private int cost;
 
     /**
-     * esse é o construct da classe
-     * @param name nome
-     * @param description descricao
-     * @param cost custo
+     * Construtor padrão para inicializar os atributos básicos de uma carta.
+     * @param name O nome da carta.
+     * @param description O texto descritivo sobre o efeito ou lore da carta.
+     * @param cost O custo de energia ou recurso necessário para jogá-la.
      */
     public Card(String name, String description, int cost){
         this.name=name;
@@ -27,12 +28,12 @@ public abstract class Card{
     public abstract void use(Entity user, Entity opponent);
 
     /**
-     * classe abstrata que printa a descrição de cada carta
+     * Exibe a descrição detalhada da carta
      */
     public abstract void showDescription();
 
     /**
-     * 
+     * Getter para o custo da carta
      * @return o custo de uma carta
      */
     public int getCost(){
@@ -40,7 +41,7 @@ public abstract class Card{
     }
 
     /**
-     * 
+     * Getter para o nome da carta
      * @return o nome da carta
      */
     public String getName(){
@@ -48,7 +49,7 @@ public abstract class Card{
     }
 
     /**
-     * 
+     * Getter para a descrição da carta
      * @return a descrição da carta
      */
     public String getDescription(){

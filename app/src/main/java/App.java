@@ -3,9 +3,12 @@ import java.util.Scanner;
 import java.util.Collections;
 
 /**
- * Na app, usamos basicamente para declararmos os objetos em si: heróis, vilões, feitiços e cartas propriamente ditas.
+ * Classe principal responsável pela inicialização do jogo, configuração 
+ * inicial das entidades (Herói e Inimigo) e execução do loop de combate.
+ *
+ * @author Rafael Ruas - 204824
+ * @author João [complemento] - RA LEMBRA DE COMPLETAR AQUI @GILBERTI
  */
-
 public class App{
 
     public static void main(String[] args){
