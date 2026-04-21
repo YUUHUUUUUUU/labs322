@@ -70,7 +70,12 @@ public abstract class Entity {
         return this.shield;
     }
     public void increaseShield(int value){
-        this.shield += value;
+        if (this.shield+value >= 0){
+          this.shield += value;  
+        } else {
+            this.shield = 0;
+        }
+
     }
     
     //publisher methods
@@ -86,7 +91,11 @@ public abstract class Entity {
         return this.energy;
     }
     public void subtractEnergy(int value){
-        this.energy-=value;
+        if(value>this.energy){
+            this.energy=0;
+        } else{
+            this.energy-=value;
+        }
     }
     public void regenerate(){
         this.energy+=this.energyRegeneration;
