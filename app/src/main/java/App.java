@@ -28,7 +28,7 @@ public class App{
         Effect energyBuff  = new EnergyEffect("Energy Buff", "Regenerates Energy", 3, 3);
         Effect poison = new PoisonEffect("Poison", "Strong Poison", 2, 4);
         Effect mordidaVeneno = new PoisonEffect("Poisoned bite", "Poison present in the creature's teeth",2,3);
-        Effect endurecimento_permanente = new PoisonEffect("Permanent rigid skin", "For 5 rounds, the creature maintains a shield of strength 4", 5, 4);
+        Effect endurecimento_permanente = new ShieldEffect("Permanent rigid skin", "For 5 rounds, the creature maintains a shield of strength 4", 5, 4);
 
         // Instanciação das cartas do hero
         CardDamage espada = new CardDamage("Espada","Strong attack", 5, 10);
