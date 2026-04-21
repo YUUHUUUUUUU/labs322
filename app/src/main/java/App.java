@@ -7,7 +7,7 @@ import java.util.Collections;
  * inicial das entidades (Herói e Inimigo) e execução do loop de combate.
  *
  * @author Rafael Ruas - 204824
- * @author João [complemento] - RA LEMBRA DE COMPLETAR AQUI @GILBERTI
+ * @author João Gilberti - 288885
  */
 public class App{
 
