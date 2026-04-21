@@ -17,7 +17,7 @@ public class StandardHeroDeck extends Deck{
         shop.add(factory.getCard("Summer Break"));
 
         shop.add(factory.getCard("Coffe"));
-
+        
         Collections.shuffle(shop);
     }
 

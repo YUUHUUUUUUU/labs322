@@ -68,8 +68,7 @@ public class Campaign {
                 }else{
                     //implement exception handling
                 }
-
-            }
+            }else return;
         }
     }
 

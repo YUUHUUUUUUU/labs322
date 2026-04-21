@@ -42,8 +42,8 @@ public class App{
             if(sChoice.equals("y")){
                 System.out.println("Imput the cheat code:");
                 sChoice = scanner.nextLine();
-                if(sChoice.equals("O Ruas eh muito bonito")){
-                    System.out.println("Thanks! Life set to 1000000, Energy Regeneration to 100 and Damage Multiplier to 10");
+                if(sChoice.equals("42")){
+                    System.out.println("Cheat Activated! Life set to 1000000, Energy Regeneration to 100 and Damage Multiplier to 10");
                     hero.setLife(1000000);
                     hero.setEnergyRegeneration(100);
                     hero.setDamageMultiplier(10);
@@ -61,7 +61,7 @@ public class App{
         }else{
             //implement exception handling
         }
-        
+
         scanner.close();
     }
 }

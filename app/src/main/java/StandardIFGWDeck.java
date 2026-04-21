@@ -14,8 +14,7 @@ public class StandardIFGWDeck extends Deck{
 
         shop.add(factory.getCard("Cancel Classes"));
         shop.add(factory.getCard("Public Servant Immunity"));
-        shop.add(factory.getCard("Dash"));
-        shop.add(factory.getCard("Dash"));
+        shop.add(factory.getCard("Paid Leave"));
 
         shop.add(factory.getCard("Radium"));
         shop.add(factory.getCard("Coffe"));

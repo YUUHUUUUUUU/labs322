@@ -24,7 +24,7 @@ public class CardFactory {
         cardTemplates.put("Eraser", new CardDamage("Eraser","Weak attack", 3, 20));
 
         cardTemplates.put("Excused Absence", new CardShield("Excused Absence","Weak defense", 2, 10));
-        cardTemplates.put("Doctor's note", new CardShield("Doctor's Note","Medium defense",3,20));
+        cardTemplates.put("Doctor's Note", new CardShield("Doctor's Note","Medium defense",3,20));
         cardTemplates.put("Exam Exemption", new CardShield("Exam Exemption","Strong defense", 4, 30));
         cardTemplates.put("Summer Break", new CardShield("Summer Break","Ultimate defense", 10, 100));
 
