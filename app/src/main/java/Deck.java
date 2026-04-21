@@ -12,14 +12,16 @@ public class Deck{
     private ArrayList<Card> shop = new ArrayList<Card>();
 
     /**
-     * Construtor da classe Deck.
-     * @param hand A lista que representará a mão da entidade. Passada por referência 
-     * para permitir a sincronização depois de instanciado.
-     */
-    Deck(ArrayList<Card> hand){
-        this.hand = hand;
+    * Construtor da classe Deck.
+    * @param hand A lista que representará a mão da entidade. Passada por referência 
+    * para permitir a sincronização depois de instanciado.
+    */
+    Deck(ArrayList<Card> shop){
+        this.shop = shop;
     }
 
+    public Deck() {} // Empty constructor
+  
     /**
      * Getter das cartas que estão atualmente na mão da entidade.
      * @return A lista de cartas na mão.

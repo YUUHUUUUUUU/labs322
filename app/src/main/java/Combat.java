@@ -125,6 +125,7 @@ public class Combat{
                 Card selectedCard = hero.getDeck().getHand().get(option-1);
                 selectedCard.use(hero, enemy);
                 hero.getDeck().getHand().remove(selectedCard);
+                hero.getDeck().getTrash().add(selectedCard);
                 
             } else System.out.println("Turn skipped!");
         }
@@ -217,9 +218,10 @@ public class Combat{
             //System.out.println("Select the number of the card you want to use or 0 to skip your turn."); //keep for debug
             option = rng.nextInt(enemy.getDeck().getHand().size()+1);
             if(option>0 && option <= enemy.getDeck().getHand().size()){
-                Card selecteCard = enemy.getDeck().getHand().get(option-1);
-                selecteCard.use(enemy, hero);
-                enemy.getDeck().getHand().remove(selecteCard);
+                Card selectedCard = enemy.getDeck().getHand().get(option-1);
+                selectedCard.use(enemy, hero);
+                enemy.getDeck().getHand().remove(selectedCard);
+                enemy.getDeck().getTrash().add(selectedCard);
                 
             } else System.out.println("Turn skipped!");
         }
@@ -233,14 +235,21 @@ public class Combat{
     public void combatLoop(){
         while (true){
             heroTurn();
-            if(enemy.isAlive()){
-                enemyTurn();
-            } else {
+
+            if(!enemy.isAlive()){
                 System.out.println("You win!");
                 return;
+            }else if(!hero.isAlive()){
+                System.out.println("You died!");
+                return;
             }
-            
-            if(!hero.isAlive()){
+
+            enemyTurn();
+
+            if(!enemy.isAlive()){
+                System.out.println("You win!");
+                return;
+            }else if(!hero.isAlive()){
                 System.out.println("You died!");
                 return;
             }

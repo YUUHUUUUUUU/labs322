@@ -41,9 +41,11 @@ public class CardDamage extends Card{
      */
     @Override
     public void use(Entity user, Entity opponent){
-        opponent.receiveDamage(this.damage);
+        int finalDamage = (int) (damage * user.getDamageMultiplier());
+        finalDamage = (finalDamage/5)*5;
+        opponent.receiveDamage(finalDamage);
         System.out.println(user.getName() + " used " + this.getName());
-        System.out.println(opponent.getName() + " lost " + Math.max(this.damage-opponent.getShield(),1) + " life!");
+        System.out.println(opponent.getName() + " lost " + Math.max(finalDamage-opponent.getShield(),1) + " life!");
         if(effect != null){
             effect.subscribe(opponent);
             System.err.println(opponent.getName() + " was inflicted with " + effect.getName() + " (" + effect.useDescription() + ")");
@@ -57,6 +59,6 @@ public class CardDamage extends Card{
      */
     @Override
     public void showDescription(){
-        System.out.println(this.getName() + ", " + this.getDescription() + " (" + this.damage + " damage, -" + this.getCost() + " energy)");
+        System.out.println(this.getName() + ", " + this.getDescription() + " (" + this.damage + " base damage, -" + this.getCost() + " energy)");
     }
 }

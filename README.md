@@ -1,13 +1,18 @@
-## Laboratório 4
+## Laboratório 5
 
-# Gradle
-Adicionei o gradle ao projeto, que aparentemente rodou com o ./gradlew run, como a tarefa pedia!
+# Campanha
+Foi criada a classe Campaign para que instancia inimigos, cria um DAG com eles e administra o fluxo da campanha onde o
+jogador pode escolher o próximo combate ou salvar e sair.
 
-# Lógica de batalha mais estrategista
-Fizemos o vilão ter mais ataques e ataques mais poderosos com menor custo, diminuímos a vida do herói também, tudo com o intuito de que não seja um jogo "trivial" para nenhum dos lados. Agora, você tem que pensar no que vai usar com base no que o inimigo tem em mãos.
+# Testes Unitários
+Foram feitos testes unitários que cobrem boa parte do código.
 
-# Novas cartas
-Criamos 5 novas cartas! Entre elas estão: cutuvelada - um ataque fraco do herói e 4 para o vilão: cuspida (um ataque fraco de baixo custo), especial (um ataque fortíssimo de baixissimo custo, que torna o jogo muito interessante), endurecer_pele (um aumento pequeno e instantâneo de escudo do vilão, especificamente), endurecimento_permanente (escudo por 5 rounds por um custo baixo de energia usado exclusivamente pelo vilão).
+# Permanência
+Foi feito o esqueleto para um mecanismo de save no jogo, com as interações no terminal onde seria possível salvar ou carregar um save.
 
-# JAVADOC
-Fizemos para cada classe, como pedido.
+# Card Factory
+Foi criada uma classe CardFactory que contém a template de efeitos e cartas, além de facilitar instanciar as cartas, isso
+centraliza onde as cartas podem ser modificadas, como diferentes inimigos e heróis podem possuir cartas em comum o CardFactory facilita a manutenção (e.g.: buffs e debuffs).
+
+# Expansão (todo)
+Com a criação da CardFactory, StandardClassDeck e Campaign ficou prático cria novas campanhas para institutos diferentes com ataques especificos da campanha (e.g.: efeitos de doença para oo IB e armas químicas e radiação para o IQ), bastando transformar Campaign em uma classe abstrats, criar as novas cartas e efeitos no CardFactory e criar o StandardInstituteDeck.

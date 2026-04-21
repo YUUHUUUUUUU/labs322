@@ -1,6 +1,7 @@
 # Java compiled output
 *.class
 *.jar
+!gradle/wrapper/gradle-wrapper.jar
 bin/
 
 # VS Code settings
