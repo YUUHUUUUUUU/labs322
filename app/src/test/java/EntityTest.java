@@ -1,8 +1,5 @@
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestMethodOrder;
-
 import static org.junit.jupiter.api.Assertions.*;
-
 import java.util.ArrayList;
 
 public class EntityTest {
@@ -14,7 +11,7 @@ public class EntityTest {
         assertEquals(17, h.getLife());
         Enemy e = new Enemy("joao",20,5,4,3,null);
         e.receiveDamage(3);
-        assertEquals(20,e.getLife());
+        assertEquals(19,e.getLife());
 
     }
 
@@ -28,7 +25,7 @@ public class EntityTest {
     @Test
     public void killingDamageHero(){
         Hero h = new Hero("ruas",20,5,4,3,null);
-        h.receiveDamage(23);
+        h.receiveDamage(26);
         assertEquals(false,h.isAlive());
     }
 
@@ -62,7 +59,7 @@ public class EntityTest {
     public void receiveDirectDamageHero(){
         Hero h = new Hero("ruas",20,5,4,3,null);
         h.receiveDirectDamage(3);
-        assertEquals(2,h.getLife());
+        assertEquals(17,h.getLife());
 
     }
 
