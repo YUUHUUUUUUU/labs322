@@ -47,5 +47,4 @@ public abstract class Effect{
     public abstract void use(Entity target); //this is the method called when the effect should activate
 
     public abstract String useDescription();
-
 }

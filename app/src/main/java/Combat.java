@@ -29,7 +29,7 @@ public class Combat{
         enemy.showStatus();
         System.out.println("-----------------------");
 
-        //TURNO DO HERÒI:
+        //TURNO DO HEROI:
         if(hero.getDeck().getShop().size()<2){ //se a pilha geral tiver um tamanho insuficiente traz de volta as cartas do lixo
             hero.getDeck().getTrash().addAll(hero.getDeck().getShop());
             hero.getDeck().getShop().clear();
@@ -58,8 +58,8 @@ public class Combat{
                 System.out.println("You bought " + card1.getName());
                 hero.subtractEnergy(card1.getCost());
             } else{
-                hero.getDeck().getHand().add(card1);
-                hero.getDeck().getHand().add(card2);
+                hero.getDeck().getTrash().add(card1);
+                hero.getDeck().getTrash().add(card2);
                 System.out.println("Hand full!");
             } 
         }else if(option == 2 && hero.getEnergy()>=card2.getCost()){
@@ -69,8 +69,8 @@ public class Combat{
                 hero.subtractEnergy(card2.getCost());
                 System.out.println("You bought " + card2.getName());
             } else{
-                hero.getDeck().getHand().add(card1);
-                hero.getDeck().getHand().add(card2);
+                hero.getDeck().getTrash().add(card1);
+                hero.getDeck().getTrash().add(card2);
                 System.out.println("Hand full!");
             } 
         }else if(option == 3 && hero.getEnergy()>=card2.getCost() + card1.getCost()){
@@ -80,8 +80,8 @@ public class Combat{
                 System.out.println("You bought " + card1.getName() + " and " + card2.getName());
                 hero.subtractEnergy(card1.getCost()+card2.getCost());
             } else{
-                hero.getDeck().getHand().add(card1);
-                hero.getDeck().getHand().add(card2);
+                hero.getDeck().getTrash().add(card1);
+                hero.getDeck().getTrash().add(card2);
                 System.out.println("Hand full!");
             } 
         }else if (option!=2 && option!=1 && option!=3){
@@ -106,9 +106,10 @@ public class Combat{
             System.out.println("Select the number of the card you want to use or 0 to skip your turn.");
             option = entrada.nextInt();
             if(option>0 && option <= hero.getDeck().getHand().size()){
-                Card selecteCard = hero.getDeck().getHand().get(option-1);
-                selecteCard.use(hero, enemy);
-                hero.getDeck().getHand().remove(selecteCard);
+                Card selectedCard = hero.getDeck().getHand().get(option-1);
+                selectedCard.use(hero, enemy);
+                hero.getDeck().getHand().remove(selectedCard);
+                hero.getDeck().getTrash().add(selectedCard);
                 
             } else System.out.println("Turn skipped!");
         }
@@ -121,7 +122,6 @@ public class Combat{
         //use the Deck class for the hand, trash and shop
 
         hero.getEndPublisher().updateAll();
-
     }
 
     private void enemyTurn(){
@@ -201,9 +201,10 @@ public class Combat{
             //System.out.println("Select the number of the card you want to use or 0 to skip your turn."); //keep for debug
             option = rng.nextInt(enemy.getDeck().getHand().size()+1);
             if(option>0 && option <= enemy.getDeck().getHand().size()){
-                Card selecteCard = enemy.getDeck().getHand().get(option-1);
-                selecteCard.use(enemy, hero);
-                enemy.getDeck().getHand().remove(selecteCard);
+                Card selectedCard = enemy.getDeck().getHand().get(option-1);
+                selectedCard.use(enemy, hero);
+                enemy.getDeck().getHand().remove(selectedCard);
+                enemy.getDeck().getTrash().add(selectedCard);
                 
             } else System.out.println("Turn skipped!");
         }
@@ -214,14 +215,21 @@ public class Combat{
     public void combatLoop(){
         while (true){
             heroTurn();
-            if(enemy.isAlive()){
-                enemyTurn();
-            } else {
+
+            if(!enemy.isAlive()){
                 System.out.println("You win!");
                 return;
+            }else if(!hero.isAlive()){
+                System.out.println("You died!");
+                return;
             }
-            
-            if(!hero.isAlive()){
+
+            enemyTurn();
+
+            if(!enemy.isAlive()){
+                System.out.println("You win!");
+                return;
+            }else if(!hero.isAlive()){
                 System.out.println("You died!");
                 return;
             }

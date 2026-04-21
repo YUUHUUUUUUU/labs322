@@ -1,1 +1,5 @@
-Finish Combat implementation (check comments)
+Finish Object permanence with JSON
+
+Polish campaign flow
+
+Add other campaigns, such as IB and IQ, that could have special attacks involving chemical weapons and diseases

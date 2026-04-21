@@ -8,14 +8,16 @@ public abstract class Entity {
     private Publisher beginningPublisher = new Publisher(this);
     private Publisher endPublisher = new Publisher(this);
     private Deck deck;
+    private double damageMultiplier;
 
     //constructor
-    public Entity(String name, int life, int shield, int energy, int energyRegeneration, Deck deck){
+    public Entity(String name, int life, int shield, int energy, int energyRegeneration, double damageMultiplier, Deck deck){
         this.name = name;
         this.life = life;
         this.shield = shield;
         this.energy = energy;
         this.energyRegeneration = energyRegeneration;
+        this.damageMultiplier = damageMultiplier;
         this.deck = deck;
     }
 
@@ -39,6 +41,9 @@ public abstract class Entity {
     }
     public void receiveDirectDamage(int damage){//for damages not blocked by shield, such as poison damage
         this.life-=damage;
+    }
+    public void setLife(int life){
+        this.life = life;
     }
 
     //shield methods
@@ -72,6 +77,17 @@ public abstract class Entity {
     }
     public int getEnergyRegeneration(){
         return this.energyRegeneration;
+    }
+    public void setEnergyRegeneration(int energyRegeneration){
+        this.energyRegeneration = energyRegeneration;
+    }
+
+    //damageMultiplier methods
+    public double getDamageMultiplier() {
+        return damageMultiplier;
+    }
+    public void setDamageMultiplier(double damageMultiplier) {
+        this.damageMultiplier = damageMultiplier;
     }
     
 

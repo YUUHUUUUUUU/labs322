@@ -8,8 +8,8 @@ public class Enemy extends Entity{
     //This game is working more as a PVP where our entities and the opponent's are totally symmetric
     //What we can do to make the heroes and monsters more different is changing their stats and decks to fit the characters
 
-    public Enemy(String name, int life, int shield, int energy, int energyRegeneration, Deck deck){
-        super(name, life, shield, energy, energyRegeneration, deck);
+    public Enemy(String name, int life, int shield, int energy, int energyRegeneration, double energyMultiplier, Deck deck){
+        super(name, life, shield, energy, energyRegeneration, energyMultiplier, deck);
     }
 
 

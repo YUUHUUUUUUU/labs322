@@ -6,9 +6,11 @@ public class Deck{
     private ArrayList<Card> trash = new ArrayList<Card>();
     private ArrayList<Card> shop = new ArrayList<Card>();
 
-    Deck(ArrayList<Card> hand){
-        this.hand = hand;
+    Deck(ArrayList<Card> shop){
+        this.shop = shop;
     }
+
+    public Deck() {} // Empty constructor
 
     public ArrayList<Card> getHand() {
         return hand;
