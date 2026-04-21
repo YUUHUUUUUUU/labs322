@@ -6,10 +6,10 @@ public class EntityTest {
 
     @Test
     public void damageAbsorbedbyShieldHero() {
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         h.receiveDamage(8);
         assertEquals(17, h.getLife());
-        Enemy e = new Enemy("joao",20,5,4,3,null);
+        Enemy e = new Enemy("joao",20,5,4,3,1,null);
         e.receiveDamage(3);
         assertEquals(19,e.getLife());
 
@@ -17,21 +17,21 @@ public class EntityTest {
 
     @Test
     public void damageLessThanShieldHero() {
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         h.receiveDamage(4);
         assertEquals(19,h.getLife());
     }
 
     @Test
     public void killingDamageHero(){
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         h.receiveDamage(26);
         assertEquals(false,h.isAlive());
     }
 
     @Test
     public void gettersHero(){
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         assertEquals(4,h.getEnergy());
         assertEquals(3,h.getEnergyRegeneration());
         assertEquals("ruas",h.getName());
@@ -39,7 +39,7 @@ public class EntityTest {
 
     @Test
     public void settersHero(){
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         h.setName("joao");
         assertEquals("joao",h.getName());
         h.setShield(3);
@@ -48,7 +48,7 @@ public class EntityTest {
 
     @Test
     public void increaseShieldHero(){
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         h.increaseShield(2);
         assertEquals(7,h.getShield());
         h.increaseShield(-8);
@@ -57,7 +57,7 @@ public class EntityTest {
 
     @Test
     public void receiveDirectDamageHero(){
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         h.receiveDirectDamage(3);
         assertEquals(17,h.getLife());
 
@@ -65,7 +65,7 @@ public class EntityTest {
 
     @Test
     public void energyFunctionsHero(){
-        Hero h = new Hero("ruas",20,5,4,3,null);
+        Hero h = new Hero("ruas",20,5,4,3,1,null);
         h.subtractEnergy(2);
         h.regenerate();
         assertEquals(5,h.getEnergy());
@@ -79,7 +79,7 @@ public class EntityTest {
         Deck deck_hero = new Deck(hand_hero);
         CardDamage espada = new CardDamage("Espada","Strong attack", 5, 10);
         deck_hero.getHand().add(espada);
-        Hero h = new Hero("ruas",20,5,4,3,deck_hero);
+        Hero h = new Hero("ruas",20,5,4,3,1,deck_hero);
         assertEquals("Espada",h.getDeck().getHand().get(0).getName());
     }
 

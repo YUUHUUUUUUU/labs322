@@ -23,8 +23,8 @@ public class DeckTest {
         Deck deck_hero = new Deck(hand_hero);
         Deck deck_enemy = new Deck(hand_enemy);
 
-        Hero h = new Hero("ruas",20,4,4,3,deck_hero);
-        Enemy e = new Enemy("joao",20,4,4,3,deck_enemy);
+        Hero h = new Hero("ruas",20,4,4,3,1,deck_hero);
+        Enemy e = new Enemy("joao",20,4,4,3,1,deck_enemy);
 
         deck_hero.getHand().add(c);
         deck_hero.getHand().add(c1);

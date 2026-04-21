@@ -20,7 +20,7 @@ public class EffectTest {
         energyBuff.reduceDuration();
         assertEquals(2,energyBuff.getDuration());
         
-        Hero hero = new Hero("Nome", 25, 0, 5,4, null);
+        Hero hero = new Hero("Nome", 25, 0, 5,4,1, null);
         energyBuff.subscribe(hero);
     }
 
@@ -35,8 +35,8 @@ public class EffectTest {
         CardEffect shieldIncreaseCard = new CardEffect ("shield buff", "increases shield",5,endurecimento_permanente);
         
         // Instanciação das entidades hero e enemy
-        Hero hero = new Hero("Nome", 25, 0, 5,4, null);
-        Enemy enemy = new Enemy("IFGW", 20, 0,7,3, null);
+        Hero hero = new Hero("Nome", 25, 0, 5,4,1, null);
+        Enemy enemy = new Enemy("IFGW", 20, 0,7,3,1,null);
 
         energyBuff.use(hero);
         assertEquals(8,hero.getEnergy());
