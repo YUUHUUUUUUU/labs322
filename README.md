@@ -5,7 +5,10 @@ Foi criada a classe Campaign para que instancia inimigos, cria um DAG com eles e
 jogador pode escolher o próximo combate ou salvar e sair.
 
 # Testes Unitários
-Foram feitos testes unitários que cobrem boa parte do código.
+Foram feitos testes unitários que cobrem boa parte do código. Eles atualmente cobrem 60% do código e só não cobrem funções que dependem do jogador digitar algo ou de funções que só tem como função printar coisas. Fizemos também testes gerando turnos aleatórios do inimigo 100 vezes. Fizemos isso pois as escolhas do inimigo são randomizadas, e por isso precisamos de muitos testes para passarmos por todas as linhas.
+
+# Starter commands
+Fizemos esse arquivo txt com todos os comandos gradle necessários para a execução do jogo.
 
 # Permanência
 Foi feito o esqueleto para um mecanismo de save no jogo, com as interações no terminal onde seria possível salvar ou carregar um save.
