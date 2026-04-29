@@ -9,9 +9,11 @@ public class Enemy extends Entity{
     //What we can do to make the heroes and monsters more different is changing their stats and decks to fit the characters
 
     public Enemy(String name, int life, int shield, int energy, int energyRegeneration, double energyMultiplier, Deck deck){
-        super(name, life, shield, energy, energyRegeneration, energyMultiplier, deck);
+        super(name, life, shield, energy, energyRegeneration, energyMultiplier, deck,0);
     }
 
-
+    public Enemy(String name, int life, int shield, int energy, int energyRegeneration, double energyMultiplier, Deck deck, int gold){
+        super(name, life, shield, energy, energyRegeneration, energyMultiplier, deck, gold);
+    }
 
 }

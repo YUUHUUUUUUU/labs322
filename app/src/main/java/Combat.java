@@ -7,7 +7,7 @@ import java.util.Random;
  * Gerencia a alternância de turnos, o sistema de compras de cartas,
  * o uso de energia e a vida das entidades.
  */
-public class Combat{
+public class Combat extends Event{
     Hero hero;
     Enemy enemy; //could be changed to be a list of heroes and enemies in the future
         
@@ -232,30 +232,36 @@ public class Combat{
     /**
      * Loop da batalha, que continua até que o inimigo ou herói morra
      */
-    public void combatLoop(){
+    public void begin(){
         while (true){
             heroTurn();
 
             if(!enemy.isAlive()){
                 System.out.println("You win!");
-                return;
+                break;
             }else if(!hero.isAlive()){
                 System.out.println("You died!");
-                return;
+                break;
             }
 
             enemyTurn();
 
             if(!enemy.isAlive()){
                 System.out.println("You win!");
-                return;
+                break;
             }else if(!hero.isAlive()){
                 System.out.println("You died!");
-                return;
+                break;
             }
 
             hero.regenerate();
             enemy.regenerate();
+
+            //implement 1/10 chance of recorrection
+        }
+
+        if(hero.isAlive()){
+            hero.addGold(enemy.getGold());
         }
     }
 }

@@ -4,6 +4,6 @@ public class CampaignTest {
     
     @Test
     public void campaign_construct(){
-        Campaign c = new Campaign();
+        Postinho c = new Postinho();
     }
 }

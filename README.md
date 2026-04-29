@@ -1,21 +1,13 @@
 ## Laboratório 5
 
-# Campanha
-Foi criada a classe Campaign para que instancia inimigos, cria um DAG com eles e administra o fluxo da campanha onde o
-jogador pode escolher o próximo combate ou salvar e sair.
+# Eventos
+Combat foi refatorado como subclasse de evento, e foram adicionados os eventos Shop, GradeRevision e Postinho. Shop e Postinho são opcoes que o Hero tem apos cada combate da campanha, o shop tem upgrade de dano e compra do Pet (Gemini Pro) e o Postinho serve como uma Campfire. Ja o GradeRevision e um evento aleatorio que pode ocorrer apos o turno do enemy no combat, simula uma recorrecao de prova em que voce pode ganhar ou perder vida.
 
-# Testes Unitários
-Foram feitos testes unitários que cobrem boa parte do código. Eles atualmente cobrem 60% do código e só não cobrem funções que dependem do jogador digitar algo ou de funções que só tem como função printar coisas. Fizemos também testes gerando turnos aleatórios do inimigo 100 vezes. Fizemos isso pois as escolhas do inimigo são randomizadas, e por isso precisamos de muitos testes para passarmos por todas as linhas.
+# Progressao
+O Shop da upgrades permanentes que podem ser comprados com gold, que e obtido ganhando combates.
 
-# Starter commands
-Fizemos esse arquivo txt com todos os comandos gradle necessários para a execução do jogo.
+# Interacao Entre Entidades
+Foi umplementado Pet (Gemni Pro) que e um atributo do heroi e se nao for nulo, o Pet causa dano no inimigo.
 
-# Permanência
-Foi feito o esqueleto para um mecanismo de save no jogo, com as interações no terminal onde seria possível salvar ou carregar um save.
-
-# Card Factory
-Foi criada uma classe CardFactory que contém a template de efeitos e cartas, além de facilitar instanciar as cartas, isso
-centraliza onde as cartas podem ser modificadas, como diferentes inimigos e heróis podem possuir cartas em comum o CardFactory facilita a manutenção (e.g.: buffs e debuffs).
-
-# Expansão (todo)
-Com a criação da CardFactory, StandardClassDeck e Campaign ficou prático cria novas campanhas para institutos diferentes com ataques especificos da campanha (e.g.: efeitos de doença para oo IB e armas químicas e radiação para o IQ), bastando transformar Campaign em uma classe abstrats, criar as novas cartas e efeitos no CardFactory e criar o StandardInstituteDeck.
+# Padrao de Design
+Para o shop o padrao de design utilizado foi decorator, criamos uma classe abstrata upgrade para criar os upgrades que podem ser comprados na loja.

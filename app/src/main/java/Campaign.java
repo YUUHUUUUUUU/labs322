@@ -3,11 +3,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Campaign {
-    private Enemy IFGW_Undergraduate = new Enemy("IFGW Undergraduate", 100, 0, 0, 3, 1, new StandardIFGWDeck());
-    private Enemy IFGW_PAD = new Enemy("IFGW PAD", 120, 0, 0, 4, 1.2, new StandardIFGWDeck());
-    private Enemy IFGW_Master = new Enemy("IFGW Master", 120, 0, 0, 5, 1.5, new StandardIFGWDeck());
-    private Enemy IFGW_PHD = new Enemy("IFGW PHD", 300, 0, 0, 2, 1, new StandardIFGWDeck());
-    private Enemy IFGW_Full_Professor = new Enemy("IFGW Full Professor", 300, 0, 0, 5, 2, new StandardIFGWDeck());
+    private Enemy IFGW_Undergraduate = new Enemy("IFGW Undergraduate", 100, 0, 0, 3, 1, new StandardIFGWDeck(), 10);
+    private Enemy IFGW_PAD = new Enemy("IFGW PAD", 120, 0, 0, 4, 1.2, new StandardIFGWDeck(), 10);
+    private Enemy IFGW_Master = new Enemy("IFGW Master", 120, 0, 0, 5, 1.5, new StandardIFGWDeck(), 20);
+    private Enemy IFGW_PHD = new Enemy("IFGW PHD", 300, 0, 0, 2, 1, new StandardIFGWDeck(), 20);
+    private Enemy IFGW_Full_Professor = new Enemy("IFGW Full Professor", 300, 0, 0, 5, 2, new StandardIFGWDeck(), 40);
 
     private ArrayList<Enemy> enemies = new ArrayList<>(List.of(IFGW_Undergraduate, IFGW_PAD, IFGW_Master, IFGW_PHD, IFGW_Full_Professor));
     private List<List<Integer>> adjacencyList = List.of(
@@ -45,7 +45,7 @@ public class Campaign {
             currentEnemy = enemies.get(currentIndex); //TODO: handle exception
 
             Combat combat = new Combat(hero, currentEnemy);
-            combat.combatLoop();
+            combat.begin();
 
             if(hero.isAlive()){
                 if(currentEnemy == IFGW_Full_Professor){
@@ -63,6 +63,8 @@ public class Campaign {
                 choice = scanner.nextInt();
                 if(choice == 1){
                     currentOptions = adjacencyList.get(currentIndex);
+
+                    //Implement choice between going to Postinho or Shop
                 }else if(choice ==2){
                     //implement save
                     return;

@@ -57,7 +57,7 @@ public class App{
             
 
             //comeca a campanha
-            Campaign campanha = new Campaign();
+            Postinho campanha = new Postinho();
             campanha.campanha_loop(hero);
         }else if(choice == 2){
             //implement save with json

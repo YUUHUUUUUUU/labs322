@@ -13,6 +13,7 @@ public abstract class Entity {
     private Publisher endPublisher = new Publisher(this);
     private Deck deck;
     private double damageMultiplier;
+    private int gold;
 
     /**
      * Construtor para inicializar os atributos da entidade.
@@ -23,7 +24,7 @@ public abstract class Entity {
      * @param energyRegeneration A quantidade de energia recuperada no fim de cada turno.
      * @param deck A instância do baralho associada a esta entidade.
      */
-    public Entity(String name, int life, int shield, int energy, int energyRegeneration, double damageMultiplier, Deck deck){
+    public Entity(String name, int life, int shield, int energy, int energyRegeneration, double damageMultiplier, Deck deck, int gold){
         this.name = name;
         this.life = life;
         this.shield = shield;
@@ -31,6 +32,7 @@ public abstract class Entity {
         this.energyRegeneration = energyRegeneration;
         this.damageMultiplier = damageMultiplier;
         this.deck = deck;
+        this.gold = gold;
     }
 
     //name methods
@@ -119,11 +121,22 @@ public abstract class Entity {
     public void setDamageMultiplier(double damageMultiplier) {
         this.damageMultiplier = damageMultiplier;
     }
+    public void addDamageMultiplier(double damageMultiplier) {
+        this.damageMultiplier += damageMultiplier;
+    }
     
-
     public Deck getDeck(){
         return this.deck;
     }
+
+    //gold methods
+    public int getGold() {
+        return gold;
+    }
+    public void addGold(int change){
+        gold+=change;
+    }
+
 
     /**
      * Exibe o status atual de vida e energia da entidade.
