@@ -4,6 +4,7 @@ public class BuyPetUpgrade extends Upgrade{
         super(price, null, null);
 
         this.pet = pet;
+        this.setName(pet.getName());
     }
 
     @Override
@@ -13,6 +14,6 @@ public class BuyPetUpgrade extends Upgrade{
 
     @Override
     public String describe() {
-        return pet.describe() + "Cost: " + getPrice();
+        return pet.describe() + " Cost: " + getPrice() + " gold";
     }
 }

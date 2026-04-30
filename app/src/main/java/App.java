@@ -30,7 +30,7 @@ public class App{
             */
             
             //heroi
-            Hero hero = new Hero("Nome", 50, 0, 5,4,1, new StandardHeroDeck(),0);
+            Hero hero = new Hero("Nome", 100, 0, 5,4,1, new StandardHeroDeck(),0);
 
             //escolhendo nome do hero
             System.out.println("Enter your name:");
@@ -53,13 +53,21 @@ public class App{
                 }
             }
 
-            //comeca a campanha
-            Campaign campaign = new Campaign();
-            campaign.campanha_loop(hero);
-        }else if(choice == 2){
-            //implement save with json
-        }else{
-            //implement exception handling
+            while(true){
+                Campaign campaign = new Campaign();
+                campaign.campanha_loop(hero);
+
+                System.out.println("What to do next?\n"
+                    + "1: Restart campaign\n"
+                    + "2: Quit game\n"
+                );
+                choice = scanner.nextInt();
+
+                if(choice == 2){
+                    System.out.println("Quitting...");
+                    return;
+                }
+            }
         }
 
         scanner.close();

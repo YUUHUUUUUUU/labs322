@@ -55,61 +55,38 @@ public class Campaign {
                 }
 
                 hero.regenerate();
-                System.out.println("You regenerated 100 Life!\n" +
+                System.out.println("You regenerated 50 Life!\n" +
                                     "Choose what to do next:\n" +
                                     "1: Go to the next Combat\n" +
-                                    "2: Go to Postinho and recover more\n" +
-                                    "3: Go to Shop\n" +
-                                    "4: Save and exit");
-                hero.receiveDirectDamage(-40);
+                                    "2: Save and exit");
+                hero.receiveDirectDamage(-50);
 
                 //choices of what to do:
                 choice = scanner.nextInt();
                 if(choice == 1){
                     currentOptions = adjacencyList.get(currentIndex);
-                }else if(choice ==2){
-
-                    Postinho postinho = new Postinho(hero);
-                    postinho.begin();
-
-                    System.out.println("Choose what to do next:\n" + "1: Go to the next Combat\n" + "2: Save and exit");
-
-                    int choice2=scanner.nextInt();
-                    if (choice2==1){
-
-                        //FALTA SO ESSAS DUAS LINHAS E DEBUGAR EM
-                        currentOptions = adjacencyList.get(currentIndex);
-
-                    } else if (choice2==2){
-                        return;
-                    } else {
-                        return;//implement exception
+                    System.out.println("Before the battle, do you want to visit Postinho for healing or the shop for damage upgrades?\n" +
+                                        "1: Postinho\n" +
+                                        "2: Shop"
+                    );
+                    choice = scanner.nextInt();
+                    if(choice==1){
+                        Postinho postinho = new Postinho(hero);
+                        postinho.begin();
+                    }else if(choice == 2){
+                        Shop shop = new Shop(hero);
+                        shop.begin();
+                    }else{
+                        System.out.println("Invalid entry, upgrades skipped.");
                     }
-
-                }else if (choice==3){
-
-                    Shop shop = new Shop(hero);
-                    shop.begin();
-                    
-                    System.out.println("Choose what to do next:\n" + "1: Go to the next Combat\n" + "2: Save and exit");
-
-                    int choice2=scanner.nextInt();
-                    if (choice2==1){
-
-                        //FALTA SO ESSAS DUAS LINHAS E DEBUGAR EM
-                        currentOptions = adjacencyList.get(currentIndex);
-
-                    } else if (choice2==2){
-                        return;
-                    } else {
-                        return;//implement exception
-                    }
-
-
-                } else if (choice==4){
+                } else if (choice==2){
+                    System.out.println("Exiting");
                     return;
                 }
-            } else return; //implement exception
+            } else{
+                System.out.println("Invalid input, exiting");
+                return;
+            }
         }
     }
 

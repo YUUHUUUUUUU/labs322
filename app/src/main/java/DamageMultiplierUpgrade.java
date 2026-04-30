@@ -1,7 +1,7 @@
 public class DamageMultiplierUpgrade extends Upgrade{
-    private int multiplier;
+    private double multiplier;
 
-    DamageMultiplierUpgrade(int price, String name, String description, int multiplier){
+    DamageMultiplierUpgrade(int price, String name, String description, double multiplier){
         super(price,name,description);
         this.multiplier = multiplier;
     }
@@ -13,6 +13,6 @@ public class DamageMultiplierUpgrade extends Upgrade{
 
     @Override
     public String describe() {
-        return this.getName() + ": " + this.getDescription() + " (+" + multiplier + "damage multiplier)";
+        return this.getName() + ": " + this.getDescription() + " (+" + multiplier + " damage multiplier)" + " Cost: " + getPrice() + " gold";
     }
 }

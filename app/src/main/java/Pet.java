@@ -10,12 +10,16 @@ public class Pet {
     }
 
     public void attack(Enemy enemy){
-        System.out.println(name + "Attacked!");
-        System.out.println(enemy.getName() + " lost " + Math.max(damage-enemy.getShield(),1) + " life!");
+        System.out.println(name + " Attacked!");
+        System.out.println(enemy.getName() + " lost " + Math.max(damage-enemy.getShield(),1) + " life!\n");
         enemy.receiveDamage(damage);
     }
 
     public String describe(){
         return name + ": " + description + " (inflicts " + damage + " damage to the enemy each round after the hero's attack!)";
+    }
+
+    public String getName() {
+        return name;
     }
 }

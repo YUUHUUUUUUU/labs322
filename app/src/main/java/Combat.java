@@ -40,6 +40,8 @@ public class Combat extends Event{
 
         // Exibe status do hero e enemy
         hero.showStatus();
+        // For debug (show damage multiplier)
+        System.out.println("Damage multiplier " + hero.getDamageMultiplier());
         System.out.println("-----------------------");
         enemy.showStatus();
         System.out.println("-----------------------");
@@ -132,13 +134,7 @@ public class Combat extends Event{
 
         hero.getEndPublisher().updateAll();
 
-        GradeRevision revision = new GradeRevision(hero);
-        revision.begin();
-
-        if (hero.hasPet()){
-            hero.getPet().attack(enemy);
-        }
-
+        hero.usePet(enemy);
     }
 
     /**
@@ -252,6 +248,8 @@ public class Combat extends Event{
                 break;
             }
 
+            enemy.setShield(0);
+
             enemyTurn();
 
             if(!enemy.isAlive()){
@@ -263,9 +261,14 @@ public class Combat extends Event{
             }
 
             hero.regenerate();
+            hero.setShield(0);
             enemy.regenerate();
 
-            //implement 1/10 chance of recorrection
+            int revisionRandom = new Random().nextInt(5);
+            if(revisionRandom == 0){
+                GradeRevision gradeRevision = new GradeRevision(hero);
+                gradeRevision.begin();
+            }
         }
 
         if(hero.isAlive()){

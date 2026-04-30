@@ -21,5 +21,8 @@ public class Hero extends Entity{
     public boolean hasPet(){
         return pet != null;
     }
+    public void usePet(Enemy enemy){
+        if(hasPet())pet.attack(enemy);
+    }
 
 }
