@@ -14,4 +14,12 @@ public class Hero extends Entity{
         this.pet = pet;
     }
 
+    public Pet getPet(){
+        return pet;
+    }
+
+    public boolean hasPet(){
+        return pet != null;
+    }
+
 }

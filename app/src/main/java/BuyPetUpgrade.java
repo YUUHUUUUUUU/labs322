@@ -1,6 +1,6 @@
-public class BuyPet extends Upgrade{
+public class BuyPetUpgrade extends Upgrade{
     Pet pet;
-    BuyPet(int price, Pet pet){
+    BuyPetUpgrade(int price, Pet pet){
         super(price, null, null);
 
         this.pet = pet;
@@ -13,6 +13,6 @@ public class BuyPet extends Upgrade{
 
     @Override
     public String describe() {
-        return pet.describe();
+        return pet.describe() + "Cost: " + getPrice();
     }
 }

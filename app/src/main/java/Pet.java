@@ -16,6 +16,6 @@ public class Pet {
     }
 
     public String describe(){
-        return name + ": " + description + " (inflicts " + damage + " damage to the enemy each round)"; 
+        return name + ": " + description + " (inflicts " + damage + " damage to the enemy each round after the hero's attack!)";
     }
 }

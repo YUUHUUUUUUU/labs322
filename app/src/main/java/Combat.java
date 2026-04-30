@@ -130,11 +130,15 @@ public class Combat extends Event{
             } else System.out.println("Turn skipped!");
         }
 
-        GradeRevision revision = new GradeRevision(hero);
+        hero.getEndPublisher().updateAll();
 
+        GradeRevision revision = new GradeRevision(hero);
         revision.begin();
 
-        hero.getEndPublisher().updateAll();
+        if (hero.hasPet()){
+            hero.getPet().attack(enemy);
+        }
+
     }
 
     /**

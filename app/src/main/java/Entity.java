@@ -124,6 +124,10 @@ public abstract class Entity {
     public void addDamageMultiplier(double damageMultiplier) {
         this.damageMultiplier += damageMultiplier;
     }
+
+    public String describeDamageMultiplier(){
+        return "Makes every damage of the combat used by you multiplied by "+this.damageMultiplier;
+    }
     
     public Deck getDeck(){
         return this.deck;

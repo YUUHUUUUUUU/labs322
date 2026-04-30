@@ -1,4 +1,5 @@
 import java.util.List;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -57,22 +58,58 @@ public class Campaign {
                 System.out.println("You regenerated 100 Life!\n" +
                                     "Choose what to do next:\n" +
                                     "1: Go to the next Combat\n" +
-                                    "2: Save and exit");
-                hero.receiveDirectDamage(-100);
+                                    "2: Go to Postinho and recover more\n" +
+                                    "3: Go to Shop\n" +
+                                    "4: Save and exit");
+                hero.receiveDirectDamage(-40);
 
+                //choices of what to do:
                 choice = scanner.nextInt();
                 if(choice == 1){
                     currentOptions = adjacencyList.get(currentIndex);
-
-                    //Implement choice between going to Postinho or Shop
                 }else if(choice ==2){
-                    //implement save
-                    return;
-                }else{
-                    //implement exception handling
+
+                    Postinho postinho = new Postinho(hero);
+                    postinho.begin();
+
+                    System.out.println("Choose what to do next:\n" + "1: Go to the next Combat\n" + "2: Save and exit");
+
+                    int choice2=scanner.nextInt();
+                    if (choice2==1){
+
+                        //FALTA SO ESSAS DUAS LINHAS E DEBUGAR EM
+                        currentOptions = adjacencyList.get(currentIndex);
+
+                    } else if (choice2==2){
+                        return;
+                    } else {
+                        return;//implement exception
+                    }
+
+                }else if (choice==3){
+
+                    Shop shop = new Shop(hero);
+                    shop.begin();
+                    
+                    System.out.println("Choose what to do next:\n" + "1: Go to the next Combat\n" + "2: Save and exit");
+
+                    int choice2=scanner.nextInt();
+                    if (choice2==1){
+
+                        //FALTA SO ESSAS DUAS LINHAS E DEBUGAR EM
+                        currentOptions = adjacencyList.get(currentIndex);
+
+                    } else if (choice2==2){
+                        return;
+                    } else {
+                        return;//implement exception
+                    }
+
+
+                } else if (choice==4){
                     return;
                 }
-            }else return;
+            } else return; //implement exception
         }
     }
 
