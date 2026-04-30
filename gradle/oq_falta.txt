@@ -1,0 +1,8 @@
+falta eu implementar o que o shop faz: precisa dos métodos descricao do shop, precisa ter como deixar o heroi selecionar (shop loop)
+shop tambem precisa ter uma lista finita de itens que vao ser exibidos. será que vale a pena implementar um item
+novo que so aparece dps da kill dos nao basicos?
+
+alem disso, falta a logica toda de ajuda do pet no proprio loop do combat.
+
+falta fazer a campfire e recorrecao de prova, tanto implementar quanto colocar elas no loop certo
+

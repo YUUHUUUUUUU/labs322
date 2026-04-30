@@ -1,3 +1,4 @@
+import java.util.Random;
 
 public class Shop extends Event{
     private Hero hero;
@@ -7,6 +8,8 @@ public class Shop extends Event{
     }
 
     public void begin(){
+
+        
         //instancite upgrades:
         //      +damage multiplier
         //      Pet (Gemini)

@@ -42,7 +42,7 @@ public class Campaign {
             choice = scanner.nextInt();
             
             currentIndex = currentOptions.get(choice - 1);
-            currentEnemy = enemies.get(currentIndex); //TODO: handle exception
+            currentEnemy = enemies.get(currentIndex); //TO DO: handle exception
 
             Combat combat = new Combat(hero, currentEnemy);
             combat.begin();
