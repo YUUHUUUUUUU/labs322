@@ -1,6 +1,4 @@
-import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Collections;
 
 /**
  * Classe principal responsável pela inicialização do jogo, configuração 
@@ -32,7 +30,7 @@ public class App{
             */
             
             //heroi
-            Hero hero = new Hero("Nome", 100, 0, 5,4, 1, new StandardHeroDeck());
+            Hero hero = new Hero("Nome", 100, 0, 5,4,1, new StandardHeroDeck(),0);
 
             //escolhendo nome do hero
             System.out.println("Enter your name:");
@@ -54,15 +52,22 @@ public class App{
                     System.out.println("Invalid cheat code!");
                 }
             }
-            
 
-            //comeca a campanha
-            Campaign campanha = new Campaign();
-            campanha.campanha_loop(hero);
-        }else if(choice == 2){
-            //implement save with json
-        }else{
-            //implement exception handling
+            while(true){
+                Campaign campaign = new Campaign();
+                campaign.campanha_loop(hero);
+
+                System.out.println("What to do next?\n"
+                    + "1: Restart campaign\n"
+                    + "2: Quit game\n"
+                );
+                choice = scanner.nextInt();
+
+                if(choice == 2){
+                    System.out.println("Quitting...");
+                    return;
+                }
+            }
         }
 
         scanner.close();

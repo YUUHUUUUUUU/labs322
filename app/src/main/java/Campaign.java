@@ -1,13 +1,14 @@
 import java.util.List;
+import java.time.Year;
 import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Campaign {
-    private Enemy IFGW_Undergraduate = new Enemy("IFGW Undergraduate", 100, 0, 0, 3, 1, new StandardIFGWDeck());
-    private Enemy IFGW_PAD = new Enemy("IFGW PAD", 120, 0, 0, 4, 1.2, new StandardIFGWDeck());
-    private Enemy IFGW_Master = new Enemy("IFGW Master", 120, 0, 0, 5, 1.5, new StandardIFGWDeck());
-    private Enemy IFGW_PHD = new Enemy("IFGW PHD", 300, 0, 0, 2, 1, new StandardIFGWDeck());
-    private Enemy IFGW_Full_Professor = new Enemy("IFGW Full Professor", 300, 0, 0, 5, 2, new StandardIFGWDeck());
+    private Enemy IFGW_Undergraduate = new Enemy("IFGW Undergraduate", 100, 0, 0, 3, 1, new StandardIFGWDeck(), 10);
+    private Enemy IFGW_PAD = new Enemy("IFGW PAD", 120, 0, 0, 4, 1.2, new StandardIFGWDeck(), 10);
+    private Enemy IFGW_Master = new Enemy("IFGW Master", 120, 0, 0, 5, 1.5, new StandardIFGWDeck(), 20);
+    private Enemy IFGW_PHD = new Enemy("IFGW PHD", 300, 0, 0, 2, 1, new StandardIFGWDeck(), 20);
+    private Enemy IFGW_Full_Professor = new Enemy("IFGW Full Professor", 300, 0, 0, 5, 2, new StandardIFGWDeck(), 40);
 
     private ArrayList<Enemy> enemies = new ArrayList<>(List.of(IFGW_Undergraduate, IFGW_PAD, IFGW_Master, IFGW_PHD, IFGW_Full_Professor));
     private List<List<Integer>> adjacencyList = List.of(
@@ -42,10 +43,10 @@ public class Campaign {
             choice = scanner.nextInt();
             
             currentIndex = currentOptions.get(choice - 1);
-            currentEnemy = enemies.get(currentIndex); //TODO: handle exception
+            currentEnemy = enemies.get(currentIndex); //TO DO: handle exception
 
             Combat combat = new Combat(hero, currentEnemy);
-            combat.combatLoop();
+            combat.begin();
 
             if(hero.isAlive()){
                 if(currentEnemy == IFGW_Full_Professor){
@@ -54,23 +55,38 @@ public class Campaign {
                 }
 
                 hero.regenerate();
-                System.out.println("You regenerated 100 Life!\n" +
+                System.out.println("You regenerated 50 Life!\n" +
                                     "Choose what to do next:\n" +
                                     "1: Go to the next Combat\n" +
                                     "2: Save and exit");
-                hero.receiveDirectDamage(-100);
+                hero.receiveDirectDamage(-50);
 
+                //choices of what to do:
                 choice = scanner.nextInt();
                 if(choice == 1){
                     currentOptions = adjacencyList.get(currentIndex);
-                }else if(choice ==2){
-                    //implement save
-                    return;
-                }else{
-                    //implement exception handling
+                    System.out.println("Before the battle, do you want to visit Postinho for healing or the shop for damage upgrades?\n" +
+                                        "1: Postinho\n" +
+                                        "2: Shop"
+                    );
+                    choice = scanner.nextInt();
+                    if(choice==1){
+                        Postinho postinho = new Postinho(hero);
+                        postinho.begin();
+                    }else if(choice == 2){
+                        Shop shop = new Shop(hero);
+                        shop.begin();
+                    }else{
+                        System.out.println("Invalid entry, upgrades skipped.");
+                    }
+                } else if (choice==2){
+                    System.out.println("Exiting");
                     return;
                 }
-            }else return;
+            } else{
+                System.out.println("Invalid input, exiting");
+                return;
+            }
         }
     }
 

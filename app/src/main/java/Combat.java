@@ -7,7 +7,7 @@ import java.util.Random;
  * Gerencia a alternância de turnos, o sistema de compras de cartas,
  * o uso de energia e a vida das entidades.
  */
-public class Combat{
+public class Combat extends Event{
     Hero hero;
     Enemy enemy; //could be changed to be a list of heroes and enemies in the future
         
@@ -40,6 +40,8 @@ public class Combat{
 
         // Exibe status do hero e enemy
         hero.showStatus();
+        // For debug (show damage multiplier)
+        System.out.println("Damage multiplier " + hero.getDamageMultiplier());
         System.out.println("-----------------------");
         enemy.showStatus();
         System.out.println("-----------------------");
@@ -131,6 +133,8 @@ public class Combat{
         }
 
         hero.getEndPublisher().updateAll();
+
+        hero.usePet(enemy);
     }
 
     /**
@@ -232,30 +236,43 @@ public class Combat{
     /**
      * Loop da batalha, que continua até que o inimigo ou herói morra
      */
-    public void combatLoop(){
+    public void begin(){
         while (true){
             heroTurn();
 
             if(!enemy.isAlive()){
                 System.out.println("You win!");
-                return;
+                break;
             }else if(!hero.isAlive()){
                 System.out.println("You died!");
-                return;
+                break;
             }
+
+            enemy.setShield(0);
 
             enemyTurn();
 
             if(!enemy.isAlive()){
                 System.out.println("You win!");
-                return;
+                break;
             }else if(!hero.isAlive()){
                 System.out.println("You died!");
-                return;
+                break;
             }
 
             hero.regenerate();
+            hero.setShield(0);
             enemy.regenerate();
+
+            int revisionRandom = new Random().nextInt(5);
+            if(revisionRandom == 0){
+                GradeRevision gradeRevision = new GradeRevision(hero);
+                gradeRevision.begin();
+            }
+        }
+
+        if(hero.isAlive()){
+            hero.addGold(enemy.getGold());
         }
     }
 }
